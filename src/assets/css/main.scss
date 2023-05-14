@@ -2,6 +2,9 @@
 @import './_stacks';
 @import './_fonts';
 
+// :root {
+//   gap: var(--size-5);
+// }
 
 * {
   box-sizing: border-box;
@@ -15,6 +18,13 @@
 html,
 body {
   height: 100%;
-  background-color: var(--gray-2);
+  color: var(--gray-2);
+  background-color: var(--gray-12);
 
+}
+
+.panel {
+  padding: var(--size-3) var(--size-4);
+  border-radius: var(--radius-2);
+  background-color: var(--gray-9);
 }
