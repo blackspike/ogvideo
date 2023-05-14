@@ -1,162 +1,244 @@
 <script>
-	import { onMount } from 'svelte'
-	import { fabric } from 'fabric'
-	import anime from 'animejs'
-	import { title, subtitle, fg, bg, sizeTitle, sizeSubtitle } from '../store.js'
+  import { onMount } from 'svelte'
+  import { fabric } from 'fabric'
+  import anime from 'animejs'
+  import {
+    fg,
+    bg,
+    subtitle,
+    sizeSubtitle,
+    title,
+    sizeTitle,
+    bgOutro,
+    bgImage,
+    bgOpacity,
+    logoImage
+  } from '../store.js'
 
-	let video, canvas, titleText, subtitleText
-	export let font
-	const canvasSize = 640
-	const textDefaults = {
-		width: canvasSize - 100,
-		left: 50,
-		fill: $fg,
-		lineHeight: 1.1,
-		originY: 'bottom',
-		fontFamily: 'Satoshi-Bold'
-	}
-	let subtitleTextHeight
-	$: titlePosY = canvasSize - 80 - subtitleTextHeight
+  export let font
+  let video, canvas, titleText, subtitleText, outroGroup
 
-	onMount(() => {
-		canvas = new fabric.Canvas('canvas', {
-			backgroundColor: $bg
-		})
+  const canvasSize = 640
+  const textDefaults = {
+    width: canvasSize - 100,
+    left: 50,
+    fill: $fg,
+    lineHeight: 1.1,
+    originY: 'bottom',
+    fontFamily: 'Satoshi-Bold'
+  }
+  const layers = {
+    BOTTOM: 1,
+    MIDDLE: 2,
+    TOP: 3
+  }
 
-		let rect = new fabric.Rect({
-			left: 120,
-			top: 10,
-			fill: 'teal',
-			width: 150,
-			height: 150,
-			angle: 45
-		})
-		rect.name = 'thing'
-		canvas.add(rect)
+  let subtitleTextHeight
 
-		// Subtitle
-		subtitleText = new fabric.Textbox($subtitle, {
-			...textDefaults,
-			top: canvasSize - 50,
-			fontSize: $sizeSubtitle
-		})
-		canvas.add(subtitleText)
+  onMount(() => {
+    canvas = new fabric.Canvas('canvas', {
+      backgroundColor: $bg,
+      preserveObjectStacking: true
+    })
+    fabric.Object.prototype.selectable = false
 
-		// Title
-		titleText = new fabric.Textbox($title, {
-			...textDefaults,
-			fontSize: $sizeTitle,
-			top: canvasSize - 80 - subtitleText.calcTextHeight()
-		})
-		canvas.add(titleText)
+    let rect = new fabric.Rect({
+      left: 120,
+      top: 10,
+      fill: 'teal',
+      width: 150,
+      height: 150,
+      angle: 45
+    })
+    rect.id = 'thing'
+    canvas.add(rect)
 
-		// Update fonts
-		canvas.set('fontFamily', font)
-		canvas.requestRenderAll()
+    // Subtitle
+    subtitleText = new fabric.Textbox($subtitle, {
+      ...textDefaults,
+      top: canvasSize - 50,
+      fontSize: $sizeSubtitle
+    })
+    canvas.insertAt(subtitleText, layers.MIDDLE)
 
-		// Animate
-		anime({
-			targets: canvas.getObjects().find((o) => o.name === 'thing'),
-			left: [-300, 300],
-			easing: 'linear',
-			update: function () {
-				canvas.renderAll()
-			},
-			duration: 4000,
-			loop: true
-		})
-	})
+    // Title
+    titleText = new fabric.Textbox($title, {
+      ...textDefaults,
+      fontSize: $sizeTitle,
+      top: canvasSize - 80 - subtitleText.calcTextHeight()
+    })
 
-	// Update title text
-	$: $title, updateTitle()
-	$: $sizeTitle, updateTitle()
+    canvas.insertAt(titleText, layers.MIDDLE)
 
-	$: $subtitle, updateSubtitle()
-	$: $sizeSubtitle, updateSubtitle()
+    // Update fonts
+    canvas.set('fontFamily', font)
+    canvas.requestRenderAll()
 
-	$: $fg, updateFg()
+    // Add outro
 
-	function updateTitle() {
-		if (!titleText) return
-		titleText.set('text', $title)
-		titleText.set('fontSize', $sizeTitle)
-		canvas.requestRenderAll()
-	}
+    const outroRect = new fabric.Rect({
+      fill: $bgOutro,
+      width: canvasSize,
+      height: canvasSize,
+      opacity: 0.4
+    })
+    outroRect.id = 'outroRect'
 
-	function updateSubtitle() {
-		if (!subtitleText) return
+    outroGroup = new fabric.Group([outroRect])
+    outroGroup.opacity = 0
+    canvas.insertAt(outroGroup, layers.TOP)
 
-		subtitleText.set('text', $subtitle)
-		subtitleText.set('fontSize', $sizeSubtitle)
+    // Animate
+    anime({
+      targets: canvas.getObjects().find((o) => o.id === 'thing'),
+      left: [-300, 300],
+      easing: 'linear',
+      update: function () {
+        canvas.renderAll()
+      },
+      duration: 4000,
+      loop: true
+    })
+  })
 
-		subtitleTextHeight = subtitleText.calcTextHeight()
-		titleText.set('top', canvasSize - 80 - subtitleTextHeight)
-		canvas.requestRenderAll()
-	}
+  // Update title text
+  $: $title, updateTitle()
+  $: $sizeTitle, updateTitle()
 
-	function updateFg() {
-		if (!titleText || !subtitleText) return
-		titleText.set('fill', $fg)
-		subtitleText.set('fill', $fg)
-	}
+  $: $subtitle, updateSubtitle()
+  $: $sizeSubtitle, updateSubtitle()
 
-	// Update background
-	$: $bg, updateBg()
+  $: $fg, updateFg()
 
-	function updateBg() {
-		if (!canvas) return
-		canvas.set('backgroundColor', $bg)
-		canvas.requestRenderAll()
-	}
+  function updateTitle() {
+    if (!titleText) return
+    titleText.set('text', $title)
+    titleText.set('fontSize', $sizeTitle)
+    canvas.requestRenderAll()
+  }
 
-	// Record
-	const record = async () => {
-		const canvas = document.getElementById('canvas')
-		const videoStream = canvas.captureStream(30)
-		const mediaRecorder = new MediaRecorder(videoStream)
+  function updateSubtitle() {
+    if (!subtitleText) return
 
-		let chunks = []
+    subtitleText.set('text', $subtitle)
+    subtitleText.set('fontSize', $sizeSubtitle)
 
-		mediaRecorder.ondataavailable = function (e) {
-			chunks.push(e.data)
-		}
+    subtitleTextHeight = subtitleText.calcTextHeight()
+    titleText.set('top', canvasSize - 80 - subtitleTextHeight)
+    canvas.requestRenderAll()
+  }
 
-		mediaRecorder.onstop = function (e) {
-			const blob = new Blob(chunks, { type: 'video/mp4' })
-			chunks = []
-			const videoURL = URL.createObjectURL(blob)
-			video.src = videoURL
-		}
-		mediaRecorder.ondataavailable = function (e) {
-			chunks.push(e.data)
-		}
+  function updateFg() {
+    if (!titleText || !subtitleText) return
+    titleText.set('fill', $fg)
+    subtitleText.set('fill', $fg)
+  }
 
-		mediaRecorder.start()
-		// setInterval(draw, canvasSize);
-		setTimeout(function () {
-			mediaRecorder.stop()
-		}, 5000)
-	}
+  // Update background
+  $: $bg, updateBg()
+
+  function updateBg() {
+    if (!canvas) return
+    canvas.set('backgroundColor', $bg)
+    canvas.requestRenderAll()
+  }
+
+  // Update background image
+  $: $bgImage, updateBgImage()
+  $: $bgOpacity, updateBgImageOpacity()
+
+  function updateBgImage() {
+    console.log('test')
+
+    if (!canvas || !$bgImage) return
+    const currentImage = canvas.getObjects().find((obj) => obj.id === 'bgImage')
+    canvas.remove(currentImage)
+
+    fabric.Image.fromURL($bgImage, (img) => {
+      img.set({ opacity: $bgOpacity })
+      img.scaleToHeight(canvasSize)
+      img.id = 'bgImage'
+      canvas.insertAt(img, layers.BOTTOM)
+      console.log(canvas.getObjects())
+    })
+  }
+
+  function updateBgImageOpacity() {
+    if (!canvas) return
+    const currentImage = canvas.getObjects().find((obj) => obj.id === 'bgImage')
+
+    if (currentImage) {
+      currentImage.set('opacity', $bgOpacity)
+    }
+  }
+
+  // Update background image
+  $: $logoImage, updateLogoImage()
+
+  function updateLogoImage() {
+    if (!canvas || !$logoImage) return
+    const currentImage = outroGroup.getObjects().find((obj) => obj.id === 'logoImage')
+    outroGroup.remove(currentImage)
+
+    fabric.Image.fromURL($logoImage, (img) => {
+      img.set({
+        originX: 'center',
+        originY: 'center'
+      })
+      img.scaleToHeight(canvasSize / 4)
+      img.id = 'logoImage'
+      outroGroup.add(img)
+    })
+  }
+
+  // Record
+  const record = async () => {
+    const canvas = document.getElementById('canvas')
+    const videoStream = canvas.captureStream(30)
+    const mediaRecorder = new MediaRecorder(videoStream)
+
+    let chunks = []
+
+    mediaRecorder.ondataavailable = function (e) {
+      chunks.push(e.data)
+    }
+
+    mediaRecorder.onstop = function (e) {
+      const blob = new Blob(chunks, { type: 'video/mp4' })
+      chunks = []
+      const videoURL = URL.createObjectURL(blob)
+      video.src = videoURL
+    }
+    mediaRecorder.ondataavailable = function (e) {
+      chunks.push(e.data)
+    }
+
+    mediaRecorder.start()
+    // setInterval(draw, canvasSize);
+    setTimeout(function () {
+      mediaRecorder.stop()
+    }, 5000)
+  }
 </script>
 
 <section class="wrapper">
-	<canvas width={canvasSize} height={canvasSize} id="canvas" />
+  <canvas width={canvasSize} height={canvasSize} id="canvas" />
 
-	<details class="stuff panel">
-		<summary>Output</summary>
-		<button on:click={record}>rec</button>
-		<video bind:this={video}><track kind="captions" /></video>
-	</details>
+  <details class="stuff panel">
+    <summary>Output</summary>
+    <button on:click={record}>rec</button>
+    <video bind:this={video}><track kind="captions" /></video>
+  </details>
 </section>
 
 <style lang="scss">
-	.wrapper {
-		position: sticky;
-		top: var(--size-9);
-		height: 100%;
-	}
-	.stuff {
-		position: absolute;
-		bottom: 0;
-	}
+  .wrapper {
+    position: sticky;
+    top: var(--size-9);
+    height: 100%;
+  }
+  .stuff {
+    position: absolute;
+    bottom: 0;
+  }
 </style>
