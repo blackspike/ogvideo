@@ -1,0 +1,177 @@
+// @font-face {
+//   font-family: 'Plex var';
+//   font-weight: 100 900;
+//   font-display: swap;
+//   font-style: normal;
+//   font-named-instance: 'Regular';
+//   src: url('../../../assets/fonts/IBMPlexSansVar-Roman.woff2') format('woff2');
+// }
+// @font-face {
+//   font-family: 'Quattro';
+//   font-weight: 400;
+//   font-display: swap;
+//   font-style: normal;
+//   font-named-instance: 'Regular';
+//   src: url('/fonts/ia-quattro/iAWriterQuattroS-Regular.woff2') format('woff2');
+// }
+
+// @font-face {
+//   font-family: 'Inter var';
+//   font-weight: 100 900;
+//   font-display: swap;
+//   font-style: normal;
+//   font-named-instance: 'Regular';
+//   src: url('/fonts/Inter.var.woff2') format('woff2');
+// }
+
+@font-face {
+  font-family: 'Inter';
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+  src: url('/fonts/inter/inter-v12-latin-regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-weight: 500;
+  font-display: swap;
+  font-style: normal;
+  src: url('/fonts/inter/inter-v12-latin-500.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+  src: url('/fonts/inter/inter-v12-latin-700.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'brand';
+  src: url('/fonts/jakarta/PlusJakartaSans-SemiBold.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi-Light';
+  src: url('/fonts/satoshi/Satoshi-Light.woff2') format('woff2'),
+    url('/fonts/satoshi/Satoshi-Light.woff') format('woff');
+  font-weight: 300;
+  font-display: swap;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Satoshi-LightItalic';
+  src: url('/fonts/satoshi/Satoshi-LightItalic.woff2') format('woff2'),
+    url('/fonts/satoshi/Satoshi-LightItalic.woff') format('woff');
+  font-weight: 300;
+  font-display: swap;
+  font-style: italic;
+}
+
+
+@font-face {
+  font-family: 'Satoshi-Regular';
+  src: url('/fonts/satoshi/Satoshi-Regular.woff2') format('woff2'),
+    url('/fonts/satoshi/Satoshi-Regular.woff') format('woff');
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Satoshi-Italic';
+  src: url('/fonts/satoshi/Satoshi-Italic.woff2') format('woff2'),
+    url('/fonts/satoshi/Satoshi-Italic.woff') format('woff');
+  font-weight: 400;
+  font-display: swap;
+  font-style: italic;
+}
+
+
+@font-face {
+  font-family: 'Satoshi-Medium';
+  src: url('/fonts/satoshi/Satoshi-Medium.woff2') format('woff2'),
+    url('/fonts/satoshi/Satoshi-Medium.woff') format('woff');
+  font-weight: 500;
+  font-display: swap;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Satoshi-MediumItalic';
+  src: url('/fonts/satoshi/Satoshi-MediumItalic.woff2') format('woff2'),
+    url('/fonts/satoshi/Satoshi-MediumItalic.woff') format('woff');
+  font-weight: 500;
+  font-display: swap;
+  font-style: italic;
+}
+
+
+@font-face {
+  font-family: 'Satoshi-Bold';
+  src: url('/fonts/satoshi/Satoshi-Bold.woff2') format('woff2'),
+    url('/fonts/satoshi/Satoshi-Bold.woff') format('woff');
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Satoshi-BoldItalic';
+  src: url('/fonts/satoshi/Satoshi-BoldItalic.woff2') format('woff2'),
+    url('/fonts/satoshi/Satoshi-BoldItalic.woff') format('woff');
+  font-weight: 700;
+  font-display: swap;
+  font-style: italic;
+}
+
+
+@font-face {
+  font-family: 'Satoshi-Black';
+  src: url('/fonts/satoshi/Satoshi-Black.woff2') format('woff2'),
+    url('/fonts/satoshi/Satoshi-Black.woff') format('woff');
+  font-weight: 900;
+  font-display: swap;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Satoshi-BlackItalic';
+  src: url('/fonts/satoshi/Satoshi-BlackItalic.woff2') format('woff2'),
+    url('/fonts/satoshi/Satoshi-BlackItalic.woff') format('woff');
+  font-weight: 900;
+  font-display: swap;
+  font-style: italic;
+}
+
+// @font-face {
+//   font-family: 'yo-gilroy';
+//   src: url('/fonts/basiercircle-regular-webfont.woff2') format('woff2');
+//   font-weight: normal;
+//   font-style: normal;
+// }
+
+// @font-face {
+//   font-family: 'Plex Bold';
+//   src: url('~/assets/fonts/IBMPlexSans-Bold.woff2') format('woff2'), url('~/assets/fonts/IBMPlexSans-Bold.woff') format('woff');
+//   font-weight: normal;
+//   font-style: normal;
+// }
+
+// @font-face {
+//   font-family: 'Integral Bold';
+//   font-style: normal;
+//   font-weight: var(--font-weight-7);
+//   src: url('~/assets/fonts/IntegralCF-Bold.woff2') format('woff2');
+// }
