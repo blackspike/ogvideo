@@ -26,6 +26,8 @@
 <style lang="scss">
 	main {
 		height: 100vh;
+		max-width: 90rem;
+		margin-inline: auto;
 		display: grid;
 		gap: var(--size-5);
 		grid-template-columns: auto 1fr;

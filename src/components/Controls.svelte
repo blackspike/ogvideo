@@ -1,5 +1,6 @@
 <script>
 	import { title, subtitle, bg, fg, sizeTitle, sizeSubtitle } from '../store.js'
+	import BackgroundImage from '../components/BackgroundImage.svelte'
 </script>
 
 <div class="controls-wrapper">
@@ -42,6 +43,10 @@
 				<span>Foreground</span>
 				<input type="color" id="fg" class="fg" bind:value={$fg} />
 			</label>
+		</section>
+		<!-- BackgroundImage -->
+		<section class="controls__background-image hstack gap-3">
+			<BackgroundImage />
 		</section>
 	</div>
 </div>
