@@ -16,7 +16,8 @@
   } from '../store.js'
 
   export let font
-  let video, canvas, titleText, subtitleText, outroGroup
+
+  let video, canvas, titleText, subtitleText, outroGroup, animTimeline
 
   const canvasSize = 640
   const textDefaults = {
@@ -33,25 +34,14 @@
     TOP: 3
   }
 
-  let subtitleTextHeight
-
   onMount(() => {
     canvas = new fabric.Canvas('canvas', {
       backgroundColor: $bg,
       preserveObjectStacking: true
     })
-    fabric.Object.prototype.selectable = false
 
-    let rect = new fabric.Rect({
-      left: 120,
-      top: 10,
-      fill: 'teal',
-      width: 150,
-      height: 150,
-      angle: 45
-    })
-    rect.id = 'thing'
-    canvas.add(rect)
+    // Disable selection
+    fabric.Object.prototype.selectable = false
 
     // Subtitle
     subtitleText = new fabric.Textbox($subtitle, {
@@ -79,8 +69,7 @@
     const outroRect = new fabric.Rect({
       fill: $bgOutro,
       width: canvasSize,
-      height: canvasSize,
-      opacity: 0.4
+      height: canvasSize
     })
     outroRect.id = 'outroRect'
 
@@ -88,17 +77,91 @@
     outroGroup.opacity = 0
     canvas.insertAt(outroGroup, layers.TOP)
 
-    // Animate
-    anime({
-      targets: canvas.getObjects().find((o) => o.id === 'thing'),
-      left: [-300, 300],
-      easing: 'linear',
-      update: function () {
-        canvas.renderAll()
-      },
-      duration: 4000,
-      loop: true
+    // Add logo image
+    fabric.Image.fromURL($logoImage, (img) => {
+      img.set({
+        originX: 'center',
+        originY: 'center'
+      })
+      img.scaleToHeight(canvasSize / 4)
+      img.id = 'logoImage'
+      outroGroup.add(img)
     })
+
+    // Animate
+    // targets: canvas.getObjects().find((o) => o.id === 'thing'),
+    animTimeline = anime.timeline({
+      autoplay: false
+    })
+    animTimeline
+      .add({
+        targets: titleText,
+        top: '-=30',
+        easing: 'easeOutQuad',
+        duration: 1000,
+        update: function () {
+          canvas.renderAll()
+        },
+
+        begin: () => {
+          titleText.set('text', '')
+          let count = $title.length
+          let cur = 0
+          let t = ''
+          setInterval(() => {
+            if (cur >= count) return
+            titleText.set('text', (t += $title[cur]))
+            cur++
+          }, 20)
+        }
+      })
+      .add({
+        targets: outroGroup,
+        opacity: [0, 1],
+        easing: 'linear',
+        duration: 1000,
+        update: function () {
+          canvas.renderAll()
+        },
+        begin: () => {
+          console.log('playyy')
+          console.log(outroGroup)
+        }
+      })
+      .add({
+        targets: outroGroup.getObjects().find((obj) => obj.id === 'logoImage'),
+        opacity: [0, 1],
+        easing: 'linear',
+        duration: 1000,
+        update: function () {
+          canvas.renderAll()
+        },
+        begin: () => {
+          console.log('playyy')
+          console.log(outroGroup)
+        }
+      })
+    console.log(titleText)
+
+    // animTimeline = anime.timeline({
+    //   easing: 'easeOutExpo',
+    //   autoplay: false,
+    //   loop: true,
+    //   direction: 'alternate',
+    //   update: function () {
+    //     canvas.renderAll()
+    //   },
+    //   begin: () => {
+    //     console.log('playyy')
+    //     console.log(outroGroup)
+    //   },
+    //   targets: outroGroup,
+    //   opacity: 1,
+    //   duration: 1000,
+    //   update: function () {
+    //     canvas.renderAll()
+    //   }
+    // })
   })
 
   // Update title text
@@ -123,8 +186,7 @@
     subtitleText.set('text', $subtitle)
     subtitleText.set('fontSize', $sizeSubtitle)
 
-    subtitleTextHeight = subtitleText.calcTextHeight()
-    titleText.set('top', canvasSize - 80 - subtitleTextHeight)
+    titleText.set('top', canvasSize - 80 - subtitleText.calcTextHeight())
     canvas.requestRenderAll()
   }
 
@@ -148,8 +210,6 @@
   $: $bgOpacity, updateBgImageOpacity()
 
   function updateBgImage() {
-    console.log('test')
-
     if (!canvas || !$bgImage) return
     const currentImage = canvas.getObjects().find((obj) => obj.id === 'bgImage')
     canvas.remove(currentImage)
@@ -183,7 +243,8 @@
     fabric.Image.fromURL($logoImage, (img) => {
       img.set({
         originX: 'center',
-        originY: 'center'
+        originY: 'center',
+        opacity: 0
       })
       img.scaleToHeight(canvasSize / 4)
       img.id = 'logoImage'
@@ -191,6 +252,20 @@
     })
   }
 
+  // Add children
+  // animTimeline.add({
+  //   targets: outroGroup,
+  //   opacity: 1,
+  //   duration: 1000,
+  //   update: function () {
+  //     canvas.renderAll()
+  //   }
+  // })
+  // .add({
+  //   targets: outroGroup?.getObjects().find((obj) => obj.id === 'logoImage'),
+  //   opacity: 1,
+  //   duration: 1000
+  // })
   // Record
   const record = async () => {
     const canvas = document.getElementById('canvas')
@@ -222,6 +297,7 @@
 </script>
 
 <section class="wrapper">
+  <button on:click={animTimeline.play()}>Play</button>
   <canvas width={canvasSize} height={canvasSize} id="canvas" />
 
   <details class="stuff panel">

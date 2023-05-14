@@ -11,7 +11,7 @@
         <div class="size-color hstack gap-3 space">
           <span>Title</span>
           <label for="titleSize" class="hstack gap-3">
-            <span>Title Size</span>
+            <span>Font Size</span>
             <input id="titleSize" type="range" min="20" max="100" bind:value={$sizeTitle} />
           </label>
         </div>
@@ -24,7 +24,7 @@
         <div class="size-color hstack gap-3 space">
           <span>Subtitle</span>
           <label for="subtitleSize" class="hstack gap-3">
-            <span>Subtitle Size</span>
+            <span>Font Size</span>
             <input id="subtitleSize" type="range" min="20" max="100" bind:value={$sizeSubtitle} />
           </label>
         </div>
