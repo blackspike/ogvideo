@@ -24,4 +24,4 @@ It's for producing short blog intro videos
 Send any comments to https://mastodon.cloud/@blackspike
 
 
-<video src="static/demo.mp4" controls title="Title"></video>
+<video src="/static/demo.mp4" controls title="Title"></video>
