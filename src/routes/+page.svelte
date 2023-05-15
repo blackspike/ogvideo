@@ -22,7 +22,7 @@
 
 {#if !sorry}
   <button class="sorry" on:click={() => (sorry = true)}>
-    Sorry this app only fits on large screens :(
+    This app only fits on large screens :(
   </button>
 {/if}
 <main>
@@ -35,8 +35,9 @@
     <Controls bind:this={controls} on:play={play} on:reset={reset} on:record={record} />
   {/if}
 
-  <footer>
-    <a href="https://www.blackspike.com" class="btn">by blackspike.com</a>
+  <footer class="hstack gap-3">
+    <a class="btn credits" href="https://www.blackspike.com">by blackspike.com</a>
+    <a class="btn credits" href="/demo.mp4">Demo</a>
   </footer>
   <VideoDialog />
 </main>
@@ -44,7 +45,8 @@
 <style lang="scss">
   .sorry {
     grid-template-columns: 1/-1;
-    margin: var(--size-5);
+    margin-block-start: var(--size-5);
+    margin-inline-start: var(--size-5);
     background-color: var(--brand);
     color: var(--gray-12);
   }
@@ -56,24 +58,15 @@
     display: grid;
     gap: var(--size-5);
     padding: var(--size-5);
-    overflow-x: hidden;
-    display: contents;
+    display: grid;
+    grid-template-columns: auto 1fr;
   }
-
+  .credits {
+    background-color: var(--gray-9);
+  }
   @media screen and (min-width: 80rem) {
-    main {
-      display: grid;
-      grid-template-columns: auto 1fr;
-    }
     .sorry {
       display: none;
-    }
-  }
-
-  @media screen and (min-width: 90rem) {
-    main {
-      display: grid;
-      grid-template-columns: auto 1fr;
     }
   }
 </style>

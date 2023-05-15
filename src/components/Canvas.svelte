@@ -39,8 +39,8 @@
   }
 
   onMount(() => {
-    // Create canvas
-    canvas = new fabric.Canvas('canvas', {
+    // Create (static) canvas
+    canvas = new fabric.StaticCanvas('canvas', {
       backgroundColor: $bg,
       preserveObjectStacking: true
     })
@@ -52,9 +52,6 @@
     fetch('/temp.webp')
       .then((res) => res.blob())
       .then((blob) => ($bgImage = URL.createObjectURL(blob)))
-
-    // Disable selection
-    fabric.Object.prototype.selectable = false
 
     // Subtitle
     subtitleText = new fabric.Textbox($subtitle, {

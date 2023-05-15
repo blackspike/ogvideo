@@ -23,7 +23,7 @@
       <track kind="captions" />
     </video>
     <footer class="vstack gap-3 space">
-      <a class="btn save" href={$video} download="blog-video">Download</a>
+      <a class="btn save" href={$video} download="social-media-video">Download</a>
 
       <button value="cancel">Cancel</button>
     </footer>

@@ -33,7 +33,7 @@
           {$recording ? 'Recording…' : 'Record Video'}
         </button>
       </span>
-      <h1>Blog Video Maker</h1>
+      <h1>Social Video Maker</h1>
     </section>
     <!-- Title -->
     <section class="panel controls__title vstack gap-3">
