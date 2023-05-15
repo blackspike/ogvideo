@@ -11,7 +11,7 @@ It's for producing short blog intro videos
 - [Open Props](https://open-props.style/) for the style tokens
 - [Font Face Observer](https://github.com/bramstein/fontfaceobserver) to get fonts to load into fabric.js
 - [Satoshi](https://www.fontshare.com/fonts/satoshi) font
-- [Mountain Photo](https://unsplash.com/photos/JgOeRuGD_Y4) by [John towner](https://unsplash.com/@heytowner) on Unsplash
+- [Mountain Photo](https://unsplash.com/photos/JgOeRuGD_Y4) by [John Towner](https://unsplash.com/@heytowner) on Unsplash
 
 - Vanilla js for the video recording (`MediaRecorder` - cool!)
 
