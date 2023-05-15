@@ -1,5 +1,11 @@
 # Svelte video machine!
 
+![screenshot](static/1200x630.png)
+
+## Demo
+
+https://social-video-machine.netlify.app
+
 This is a project to learn [Svelte.js](https://svelte.dev)!
 
 It's for producing short blog intro videos
@@ -17,3 +23,5 @@ It's for producing short blog intro videos
 
 Send any comments to https://mastodon.cloud/@blackspike
 
+
+<video src="static/demo.mp4" controls title="Title"></video>
