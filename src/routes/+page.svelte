@@ -38,6 +38,7 @@
   <footer class="hstack gap-3">
     <a class="btn credits" href="https://www.blackspike.com">by blackspike.com</a>
     <a class="btn credits" href="/demo.mp4">Demo</a>
+    <a class="btn credits" href="https://github.com/blackspike/social-video-machine">GitHub</a>
   </footer>
   <VideoDialog />
 </main>
