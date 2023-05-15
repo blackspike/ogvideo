@@ -116,6 +116,13 @@
 
   // Play
   export function play() {
+    // re-init timeline
+    animTimeline = anime.timeline({
+      update: function () {
+        canvas.renderAll()
+      }
+    })
+
     const mask = canvas.getObjects().find((obj) => obj.id === 'mask')
     const logoImage = canvas.getObjects().find((obj) => obj.id === 'logoImage')
     const bgImage = canvas.getObjects().find((obj) => obj.id === 'bgImage')
@@ -127,14 +134,14 @@
       subtitleTextTop: subtitleText.top
     }
 
-    // TexTyper
+    // animTimeline.reset()
+
+    // TextTyper
     let interval
     let typingTime = 0
     let count = $title.length
     let typingPause = 20
     typingTime = typingPause * count
-
-    animTimeline.reset()
 
     titleText.opacity = 0
     subtitleText.opacity = 0
@@ -147,8 +154,6 @@
       easing: 'linear',
       direction: 'alternate'
     })
-
-    bgAnim.restart()
 
     // Timeline
     animTimeline
@@ -234,6 +239,7 @@
         complete: () => {
           // Reset
           console.log('complete 7 final')
+          animTimeline = null
           clearInterval(interval)
           logoImage.scaleX = orig.logoScaleX
           logoImage.scaleY = orig.logoScaleY
@@ -341,6 +347,7 @@
     // reset()
     play()
     $video = null
+    console.log('record called')
 
     const canvas = document.getElementById('canvas')
     const videoStream = canvas.captureStream(60)
@@ -381,6 +388,8 @@
     position: sticky;
     top: var(--size-9);
     height: 100%;
+    width: 100%;
+    aspect-ratio: 1/1;
   }
   canvas {
     border-radius: var(--radius-2);

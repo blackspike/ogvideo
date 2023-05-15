@@ -7,8 +7,7 @@
     bg,
     fg,
     bgOpacity,
-    recording,
-    key
+    recording
   } from '../store.js'
   import BackgroundImage from '../components/BackgroundImage.svelte'
   import { createEventDispatcher } from 'svelte'
@@ -17,20 +16,19 @@
   const play = () => dispatch('play')
   const reset = () => dispatch('reset')
   const record = () => {
-    $key++
     $recording = !$recording
     dispatch('record')
   }
   $: recodingActive = $recording
 </script>
 
-<div class="controls-wrapper">
+<div class="controls-wrapper" disabled={$recording}>
   <div class="controls vstack gap-5">
     <!-- Timeline -->
     <section class="panel controls__timeline hstack space">
       <span class="hstack gap-3">
         <button on:click={play}>Play</button>
-        <button on:click={reset}>Reset</button>
+        <!-- <button on:click={reset}>Reset</button> -->
         <button on:click={record} class:recodingActive disabled={$recording}>
           {$recording ? 'Recording…' : 'Record Video'}
         </button>
@@ -87,6 +85,11 @@
 </div>
 
 <style lang="scss">
+  .controls-wrapper[disabled='true'] {
+    opacity: 0.2;
+    pointer-events: none;
+    transition: opacity 1s var(--ease-in-out-3);
+  }
   .textInput {
     width: 100%;
     padding: var(--size-1) var(--size-2);

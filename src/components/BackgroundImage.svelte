@@ -38,7 +38,7 @@
       class="file-picker"
       type="file"
       id={imageType + 'input'}
-      accept="image/png, image/jpeg"
+      accept="image/png, image/jpeg, image/webp"
       bind:files
     />
     <label class="file-button" for={imageType + 'input'}

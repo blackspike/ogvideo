@@ -1,38 +1,19 @@
-# create-svelte
+# Svelte video machine!
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+This is a project to learn [Svelte.js](https://svelte.dev)!
 
-## Creating a project
+It's for producing short blog intro videos
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Uses
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+- [Fabric.js](http://fabricjs.com/) for the canvas
+- [animejs.com](https://animejs.com/) for the animation
+- [Open Props](https://open-props.style/) for the style tokens
+- [Font Face Observer](https://github.com/bramstein/fontfaceobserver) to get fonts to load into fabric.js
+- [Satoshi](https://www.fontshare.com/fonts/satoshi) font
+- [Mountain Photo](https://unsplash.com/photos/JgOeRuGD_Y4) by [John towner](https://unsplash.com/@heytowner) on Unsplash
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+- Vanilla js for the video recording (`MediaRecorder` - cool!)
 
-## Developing
+Send any comments to https://mastodon.cloud/@blackspike
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
