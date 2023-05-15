@@ -4,6 +4,7 @@
   import Canvas from '../components/Canvas.svelte'
   import FontFaceObserver from 'fontfaceobserver'
   import { onMount } from 'svelte'
+  import { logoImage, bgImage } from '../store.js'
 
   let font
   let fontLoaded = false
@@ -19,11 +20,13 @@
 
 <main>
   <div class="canvas">
-    {#if fontLoaded}
+    {#if fontLoaded && logoImage}
       <Canvas {font} bind:this={canvas} />
     {/if}
   </div>
-  <Controls bind:this={controls} on:play={play} on:reset={reset} />
+  {#if fontLoaded}
+    <Controls bind:this={controls} on:play={play} on:reset={reset} />
+  {/if}
 </main>
 
 <style lang="scss">

@@ -46,13 +46,13 @@
     </section>
     <!-- Color -->
     <section class="panel controls__color hstack space">
-      <label for="bg" class="hstack gap-3">
-        <span>Background</span>
-        <input type="color" id="bg" class="bg" bind:value={$bg} />
-      </label>
       <label for="fg" class="hstack gap-3">
         <span>Foreground</span>
         <input type="color" id="fg" class="fg" bind:value={$fg} />
+      </label>
+      <label for="bg" class="hstack gap-3">
+        <span>Background</span>
+        <input type="color" id="bg" class="bg" bind:value={$bg} />
       </label>
       <label for="bgOpacity" class="hstack gap-3">
         <span>Opacity</span>
