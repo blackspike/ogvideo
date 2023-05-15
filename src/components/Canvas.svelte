@@ -17,7 +17,7 @@
 
   export let font
 
-  let video, canvas, titleText, subtitleText, outroGroup, animTimeline
+  let video, canvas, titleText, subtitleText, animTimeline, logo, mask
 
   const canvasSize = 640
   const textDefaults = {
@@ -29,9 +29,10 @@
     fontFamily: 'Satoshi-Bold'
   }
   const layers = {
-    BOTTOM: 1,
-    MIDDLE: 2,
-    TOP: 3
+    BG: 1,
+    TITLES: 2,
+    MASK: 3,
+    LOGO: 4
   }
 
   onMount(() => {
@@ -49,7 +50,7 @@
       top: canvasSize - 50,
       fontSize: $sizeSubtitle
     })
-    canvas.insertAt(subtitleText, layers.MIDDLE)
+    canvas.insertAt(subtitleText, layers.TITLES)
 
     // Title
     titleText = new fabric.Textbox($title, {
@@ -58,111 +59,147 @@
       top: canvasSize - 80 - subtitleText.calcTextHeight()
     })
 
-    canvas.insertAt(titleText, layers.MIDDLE)
+    canvas.insertAt(titleText, layers.TITLES)
 
     // Update fonts
     canvas.set('fontFamily', font)
     canvas.requestRenderAll()
 
     // Add outro
-
-    const outroRect = new fabric.Rect({
+    mask = new fabric.Rect({
       fill: $bgOutro,
       width: canvasSize,
-      height: canvasSize
+      height: canvasSize,
+      opacity: 0
     })
-    outroRect.id = 'outroRect'
-
-    outroGroup = new fabric.Group([outroRect])
-    outroGroup.opacity = 0
-    canvas.insertAt(outroGroup, layers.TOP)
+    mask.id = 'mask'
+    canvas.insertAt(mask, layers.MASK)
 
     // Add logo image
     fabric.Image.fromURL($logoImage, (img) => {
       img.set({
         originX: 'center',
-        originY: 'center'
+        originY: 'center',
+        opacity: 0
       })
       img.scaleToHeight(canvasSize / 4)
+      canvas.centerObject(img)
       img.id = 'logoImage'
-      outroGroup.add(img)
-    })
+      img.center()
+      logo = img
 
-    // Animate
-    // targets: canvas.getObjects().find((o) => o.id === 'thing'),
-    animTimeline = anime.timeline({
-      autoplay: false
+      canvas.insertAt(img, layers.LOGO)
     })
+  })
+
+  // Animate
+  // targets: canvas.getObjects().find((o) => o.id === 'thing'),
+
+  animTimeline = anime.timeline({
+    autoplay: true,
+    update: function () {
+      canvas.renderAll()
+    }
+  })
+
+  export function reset() {
+    animTimeline.pause()
+
+    titleText.top += 30
+    titleText.opacity = 1
+    // subtitleText.top += 30
+    subtitleText.opacity = 1
+    const mask = canvas.getObjects().find((obj) => obj.id === 'mask')
+    const logoImage = canvas.getObjects().find((obj) => obj.id === 'logoImage')
+    mask.opacity = 0
+    logoImage.opacity = 0
+    console.log('reset')
+  }
+
+  export function play() {
+    let typingTime = 0
+    let count = $title.length
+    let typingPause = 20
+    typingTime = typingPause * count
+
+    animTimeline.seek(0)
+
     animTimeline
       .add({
         targets: titleText,
-        top: '-=30',
         easing: 'easeOutQuad',
         duration: 1000,
-        update: function () {
-          canvas.renderAll()
-        },
+        top: '-=30'
+      })
+      .add(
+        {
+          targets: titleText,
+          easing: 'easeOutQuad',
+          duration: 1000,
 
-        begin: () => {
-          titleText.set('text', '')
-          let count = $title.length
-          let cur = 0
-          let t = ''
-          setInterval(() => {
-            if (cur >= count) return
-            titleText.set('text', (t += $title[cur]))
-            cur++
-          }, 20)
-        }
+          begin: () => {
+            titleText.set('text', '')
+            let cur = 0
+            let t = ''
+            setInterval(() => {
+              if (cur >= count) return
+              titleText.set('text', (t += $title[cur]))
+              cur++
+            }, typingPause)
+          }
+        },
+        `-=1000`
+      )
+      .add({
+        targets: subtitleText,
+        easing: 'easeOutQuad',
+        duration: 1000,
+        opacity: [0, 1],
+        delay: 500,
+        top: '-=30'
+      })
+      .add(
+        {
+          targets: canvas.getObjects().find((obj) => obj.id === 'mask'),
+          opacity: [0, 1],
+          easing: 'linear',
+          duration: 500
+        },
+        `+=${typingTime + 2000}`
+      )
+      .add({
+        targets: canvas.getObjects().find((obj) => obj.id === 'logoImage'),
+        opacity: [0, 1],
+        scaleX: [0.4, 0.5],
+        scaleY: [0.4, 0.5],
+        easing: 'easeInOutSine',
+        duration: 500,
+        delay: 500
       })
       .add({
-        targets: outroGroup,
-        opacity: [0, 1],
-        easing: 'linear',
-        duration: 1000,
-        update: function () {
-          canvas.renderAll()
-        },
-        begin: () => {
-          console.log('playyy')
-          console.log(outroGroup)
-        }
+        targets: canvas.getObjects().find((obj) => obj.id === 'logoImage'),
+        opacity: [1, 0],
+        scaleX: [0.5, 0.6],
+        scaleY: [0.5, 0.6],
+        easing: 'easeOutCubic',
+        duration: 500,
+        delay: 2500
       })
       .add({
-        targets: outroGroup.getObjects().find((obj) => obj.id === 'logoImage'),
-        opacity: [0, 1],
-        easing: 'linear',
-        duration: 1000,
-        update: function () {
-          canvas.renderAll()
-        },
-        begin: () => {
-          console.log('playyy')
-          console.log(outroGroup)
+        opacity: 0,
+        duration: 2000,
+        complete: () => {
+          titleText.top += 30
+          titleText.opacity = 1
+          subtitleText.top += 30
+          subtitleText.opacity = 1
+          const mask = canvas.getObjects().find((obj) => obj.id === 'mask')
+          const logoImage = canvas.getObjects().find((obj) => obj.id === 'logoImage')
+          mask.opacity = 0
+          logoImage.opacity = 0
         }
       })
-    console.log(titleText)
-
-    // animTimeline = anime.timeline({
-    //   easing: 'easeOutExpo',
-    //   autoplay: false,
-    //   loop: true,
-    //   direction: 'alternate',
-    //   update: function () {
-    //     canvas.renderAll()
-    //   },
-    //   begin: () => {
-    //     console.log('playyy')
-    //     console.log(outroGroup)
-    //   },
-    //   targets: outroGroup,
-    //   opacity: 1,
-    //   duration: 1000,
-    //   update: function () {
-    //     canvas.renderAll()
-    //   }
-    // })
-  })
+  }
 
   // Update title text
   $: $title, updateTitle()
@@ -218,8 +255,7 @@
       img.set({ opacity: $bgOpacity })
       img.scaleToHeight(canvasSize)
       img.id = 'bgImage'
-      canvas.insertAt(img, layers.BOTTOM)
-      console.log(canvas.getObjects())
+      canvas.insertAt(img, layers.BG)
     })
   }
 
@@ -237,35 +273,21 @@
 
   function updateLogoImage() {
     if (!canvas || !$logoImage) return
-    const currentImage = outroGroup.getObjects().find((obj) => obj.id === 'logoImage')
-    outroGroup.remove(currentImage)
+    const currentImage = canvas.getObjects().find((obj) => obj.id === 'logoImage')
+    canvas.remove(currentImage)
 
     fabric.Image.fromURL($logoImage, (img) => {
       img.set({
         originX: 'center',
-        originY: 'center',
-        opacity: 0
+        originY: 'center'
       })
       img.scaleToHeight(canvasSize / 4)
       img.id = 'logoImage'
-      outroGroup.add(img)
+      img.center()
+      canvas.insertAt(img, layers.LOGO)
     })
   }
 
-  // Add children
-  // animTimeline.add({
-  //   targets: outroGroup,
-  //   opacity: 1,
-  //   duration: 1000,
-  //   update: function () {
-  //     canvas.renderAll()
-  //   }
-  // })
-  // .add({
-  //   targets: outroGroup?.getObjects().find((obj) => obj.id === 'logoImage'),
-  //   opacity: 1,
-  //   duration: 1000
-  // })
   // Record
   const record = async () => {
     const canvas = document.getElementById('canvas')
@@ -297,7 +319,6 @@
 </script>
 
 <section class="wrapper">
-  <button on:click={animTimeline.play()}>Play</button>
   <canvas width={canvasSize} height={canvasSize} id="canvas" />
 
   <details class="stuff panel">

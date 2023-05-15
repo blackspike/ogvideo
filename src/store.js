@@ -3,7 +3,7 @@ import { writable, readable, derived } from 'svelte/store'
 export const bgImage = writable('')
 export const logoImage = writable('')
 export const bg = writable('#1e1e1e')
-export const bgOpacity = writable(.3)
+export const bgOpacity = writable(.1)
 export const bgOutro = writable('#1e1e1e')
 export const fg = writable('#eeeeee')
 export const sizeTitle = writable(46)

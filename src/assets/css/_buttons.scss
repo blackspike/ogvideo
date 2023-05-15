@@ -1,0 +1,38 @@
+.btn,
+button {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  border-radius: var(--radius-5);
+  border: 0;
+  color: var(--gray-0);
+  display: inline-block;
+  background-color: var(--gray-12);
+  font-weight: var(--font-weight-5);
+  justify-content: center;
+  overflow: hidden;
+  padding: var(--size-2) var(--size-4);
+  text-decoration: none;
+  transition: backgound-color .2s var(--ease-in-out-3);
+
+  &:hover {
+    background-color: var(--gray-8);
+  }
+
+  &:active {
+    background-color: var(--gray-4);
+    color: var(--gray-12);
+  }
+
+}
+
+.btn-plain {
+  background-color: transparent;
+  border-width: 0;
+  font-family: inherit;
+  font-size: inherit;
+  font-style: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  padding: 0;
+}

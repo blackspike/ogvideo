@@ -12,6 +12,9 @@
     fetch('/blackspike-logo.png')
       .then((res) => res.blob())
       .then((blob) => ($logoImage = URL.createObjectURL(blob)))
+    fetch('/temp.jpg')
+      .then((res) => res.blob())
+      .then((blob) => ($bgImage = URL.createObjectURL(blob)))
   })
 
   $: if (files) {

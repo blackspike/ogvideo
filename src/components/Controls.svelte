@@ -1,10 +1,23 @@
 <script>
   import { title, sizeTitle, subtitle, sizeSubtitle, bg, fg, bgOpacity, bgImage } from '../store.js'
   import BackgroundImage from '../components/BackgroundImage.svelte'
+  import { createEventDispatcher } from 'svelte'
+  const dispatch = createEventDispatcher()
+
+  const play = () => dispatch('play')
+  const reset = () => dispatch('reset')
 </script>
 
 <div class="controls-wrapper">
   <div class="controls vstack gap-5">
+    <!-- Timeline -->
+    <section class="panel controls__timeline hstack space">
+      <span class="hstack gap-3">
+        <button on:click={play}>Play</button>
+        <button on:click={reset}>Reset</button>
+      </span>
+      <h1>Blog Video Maker</h1>
+    </section>
     <!-- Title -->
     <section class="panel controls__title vstack gap-3">
       <label for="title" class="vstack gap-4">
