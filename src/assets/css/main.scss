@@ -3,9 +3,9 @@
 @import './_stacks';
 @import './_fonts';
 
-// :root {
-//   gap: var(--size-5);
-// }
+:root {
+  --brand: #ff00ff;
+}
 
 * {
   box-sizing: border-box;

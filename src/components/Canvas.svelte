@@ -12,12 +12,14 @@
     bgOutro,
     bgImage,
     bgOpacity,
-    logoImage
+    logoImage,
+    recording,
+    video
   } from '../store.js'
 
   export let font
 
-  let video, canvas, titleText, subtitleText, animTimeline, logo, mask
+  let canvas, titleText, subtitleText, animTimeline, bgAnim, logo, mask
 
   const canvasSize = 640
   const textDefaults = {
@@ -74,8 +76,10 @@
     // Add outro
     mask = new fabric.Rect({
       fill: $bgOutro,
-      width: canvasSize,
-      height: canvasSize,
+      width: canvasSize + 10,
+      height: canvasSize + 10,
+      left: -5,
+      top: -5,
       opacity: 0
     })
     mask.id = 'mask'
@@ -88,8 +92,6 @@
 
   // Animate
   animTimeline = anime.timeline({
-    loop: false,
-    direction: 'forwards',
     update: function () {
       canvas.renderAll()
     }
@@ -99,12 +101,15 @@
   export function reset() {
     animTimeline.pause()
     animTimeline.seek(animTimeline.duration - 1)
+
     titleText.top += 30
     titleText.opacity = 1
     subtitleText.top += 30
     subtitleText.opacity = 1
     const mask = canvas.getObjects().find((obj) => obj.id === 'mask')
     const logoImage = canvas.getObjects().find((obj) => obj.id === 'logoImage')
+    const bgImage = canvas.getObjects().find((obj) => obj.id === 'bgImage')
+    bgImage.left = 0
     mask.opacity = 0
     logoImage.opacity = 0
   }
@@ -115,24 +120,35 @@
     const logoImage = canvas.getObjects().find((obj) => obj.id === 'logoImage')
     const bgImage = canvas.getObjects().find((obj) => obj.id === 'bgImage')
 
+    const orig = {
+      logoScaleX: logoImage.scaleX,
+      logoScaleY: logoImage.scaleY,
+      titleTextTop: titleText.top,
+      subtitleTextTop: subtitleText.top
+    }
+
+    // TexTyper
+    let interval
     let typingTime = 0
     let count = $title.length
     let typingPause = 20
     typingTime = typingPause * count
 
-    animTimeline.seek(0)
+    animTimeline.reset()
 
     titleText.opacity = 0
     subtitleText.opacity = 0
 
-    const bgAnim = anime({
+    bgAnim = anime({
       targets: bgImage,
-      left: canvasSize - bgImage.aCoords.tr.x,
+      left: [0, canvasSize - bgImage.aCoords.tr.x],
       duration: 20000,
       loop: true,
       easing: 'linear',
       direction: 'alternate'
     })
+
+    bgAnim.restart()
 
     // Timeline
     animTimeline
@@ -142,7 +158,8 @@
         top: '-=30',
         easing: 'easeOutQuad',
         duration: 1000,
-        delay: 1000
+        delay: 1000,
+        complete: () => console.log('complete 0')
       })
       .add(
         {
@@ -154,12 +171,13 @@
             titleText.set('text', '')
             let cur = 0
             let t = ''
-            setInterval(() => {
+            interval = setInterval(() => {
               if (cur >= count) return
               titleText.set('text', (t += $title[cur]))
               cur++
             }, typingPause)
-          }
+          },
+          complete: () => console.log('complete 1')
         },
         `-=1000`
       )
@@ -169,46 +187,59 @@
         duration: 1000,
         opacity: [0, 1],
         delay: 500,
-        top: '-=30'
+        top: '-=30',
+        complete: () => console.log('complete 2')
       })
       .add(
         {
           targets: mask,
           opacity: [0, 1],
           easing: 'linear',
-          duration: 500
+          duration: 500,
+          complete: () => console.log('complete 3')
         },
         `+=${typingTime + 2000}`
       )
       .add({
         targets: logoImage,
         opacity: [0, 1],
-        scaleX: [0.4, 0.5],
-        scaleY: [0.4, 0.5],
+        scaleX: logoImage.scaleX + 0.1,
+        scaleY: logoImage.scaleY + 0.1,
         easing: 'easeInOutSine',
         duration: 500,
-        delay: 500
+        delay: 500,
+        complete: () => console.log('complete 4')
       })
       .add({
         targets: logoImage,
         opacity: [1, 0],
-        scaleX: [0.5, 0.6],
-        scaleY: [0.5, 0.6],
+        scaleX: logoImage.scaleX + 0.2,
+        scaleY: logoImage.scaleY + 0.2,
         easing: 'easeOutCubic',
         duration: 500,
-        delay: 2500
+        delay: 2500,
+        complete: () => console.log('complete 5')
       })
       .add({
         delay: 1000,
         targets: [mask, logoImage],
         opacity: 0,
-        duration: 10
+        duration: 10,
+        complete: () => console.log('complete 6')
       })
       .add({
         targets: [titleText, subtitleText],
         opacity: 1,
-        top: '+=30',
-        duration: 10
+        duration: 10,
+        complete: () => {
+          // Reset
+          console.log('complete 7 final')
+          clearInterval(interval)
+          logoImage.scaleX = orig.logoScaleX
+          logoImage.scaleY = orig.logoScaleY
+          titleText.top = orig.titleTextTop
+          subtitleText.top = orig.subtitleTextTop
+        }
       })
   }
 
@@ -242,6 +273,7 @@
     if (!titleText || !subtitleText) return
     titleText.set('fill', $fg)
     subtitleText.set('fill', $fg)
+    canvas.requestRenderAll()
   }
 
   // Update background
@@ -250,6 +282,7 @@
   function updateBg() {
     if (!canvas) return
     canvas.set('backgroundColor', $bg)
+    mask.set('fill', $bg)
     canvas.requestRenderAll()
   }
 
@@ -296,7 +329,7 @@
         originY: 'center',
         opacity: 0
       })
-      img.scaleToHeight(canvasSize / 4)
+      img.scaleToWidth(200)
       img.id = 'logoImage'
       canvas.centerObject(img)
       canvas.insertAt(img, layers.LOGO)
@@ -304,10 +337,16 @@
   }
 
   // Record
-  const record = async () => {
+  export async function record() {
+    // reset()
+    play()
+    $video = null
+
     const canvas = document.getElementById('canvas')
-    const videoStream = canvas.captureStream(30)
-    const mediaRecorder = new MediaRecorder(videoStream)
+    const videoStream = canvas.captureStream(60)
+    const mediaRecorder = new MediaRecorder(videoStream, {
+      videoBitsPerSecond: 5000000 // Double the default quality from 2.5Mbps to 5Mbps
+    })
 
     let chunks = []
 
@@ -319,28 +358,22 @@
       const blob = new Blob(chunks, { type: 'video/mp4' })
       chunks = []
       const videoURL = URL.createObjectURL(blob)
-      video.src = videoURL
+      $video = videoURL
     }
     mediaRecorder.ondataavailable = function (e) {
       chunks.push(e.data)
     }
 
     mediaRecorder.start()
-    // setInterval(draw, canvasSize);
     setTimeout(function () {
       mediaRecorder.stop()
-    }, 5000)
+      $recording = false
+    }, animTimeline.duration - 1000)
   }
 </script>
 
 <section class="wrapper">
   <canvas width={canvasSize} height={canvasSize} id="canvas" />
-
-  <details class="stuff panel">
-    <summary>Output</summary>
-    <button on:click={record}>rec</button>
-    <video bind:this={video}><track kind="captions" /></video>
-  </details>
 </section>
 
 <style lang="scss">
@@ -349,8 +382,8 @@
     top: var(--size-9);
     height: 100%;
   }
-  .stuff {
-    position: absolute;
-    bottom: 0;
+  canvas {
+    border-radius: var(--radius-2);
+    overflow: hidden;
   }
 </style>

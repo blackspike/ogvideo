@@ -1,9 +1,13 @@
 import { writable, readable, derived } from 'svelte/store'
 
+export const key = writable(0)
+export const recording = writable(false)
+export const video = writable(null)
+export const showDialog = writable(false)
 export const bgImage = writable('')
 export const logoImage = writable('')
 export const bg = writable('#1e1e1e')
-export const bgOpacity = writable(.1)
+export const bgOpacity = writable(.2)
 export const bgOutro = writable('#1e1e1e')
 export const fg = writable('#eeeeee')
 export const sizeTitle = writable(46)

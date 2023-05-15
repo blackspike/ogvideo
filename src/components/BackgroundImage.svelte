@@ -34,7 +34,13 @@
   style="--bg: url({imageFile ? imageFile : ''})"
 >
   <form class="dropzone-form">
-    <input class="file-picker" type="file" id={imageType + 'input'} accept="image/*" bind:files />
+    <input
+      class="file-picker"
+      type="file"
+      id={imageType + 'input'}
+      accept="image/png, image/jpeg"
+      bind:files
+    />
     <label class="file-button" for={imageType + 'input'}
       >{imageType === 'bg' ? 'Background' : 'Logo'} Image</label
     >

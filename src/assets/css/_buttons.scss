@@ -9,6 +9,7 @@ button {
   display: inline-block;
   background-color: var(--gray-12);
   font-weight: var(--font-weight-5);
+  font-size: var(--font-size-1);
   justify-content: center;
   overflow: hidden;
   padding: var(--size-2) var(--size-4);
@@ -22,6 +23,11 @@ button {
   &:active {
     background-color: var(--gray-4);
     color: var(--gray-12);
+  }
+
+  &[disabled] {
+    opacity: .5;
+    pointer-events: none;
   }
 
 }

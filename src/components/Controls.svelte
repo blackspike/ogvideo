@@ -1,11 +1,27 @@
 <script>
-  import { title, sizeTitle, subtitle, sizeSubtitle, bg, fg, bgOpacity, bgImage } from '../store.js'
+  import {
+    title,
+    sizeTitle,
+    subtitle,
+    sizeSubtitle,
+    bg,
+    fg,
+    bgOpacity,
+    recording,
+    key
+  } from '../store.js'
   import BackgroundImage from '../components/BackgroundImage.svelte'
   import { createEventDispatcher } from 'svelte'
   const dispatch = createEventDispatcher()
 
   const play = () => dispatch('play')
   const reset = () => dispatch('reset')
+  const record = () => {
+    $key++
+    $recording = !$recording
+    dispatch('record')
+  }
+  $: recodingActive = $recording
 </script>
 
 <div class="controls-wrapper">
@@ -15,6 +31,9 @@
       <span class="hstack gap-3">
         <button on:click={play}>Play</button>
         <button on:click={reset}>Reset</button>
+        <button on:click={record} class:recodingActive disabled={$recording}>
+          {$recording ? 'Recording…' : 'Record Video'}
+        </button>
       </span>
       <h1>Blog Video Maker</h1>
     </section>
@@ -62,7 +81,6 @@
     <!-- BackgroundImage -->
     <section class="controls__background-image hstack gap-3">
       <BackgroundImage imageType={'bg'} />
-      <!-- <button on:click={() => ($sbgImage = '')}>&times;</button> -->
       <BackgroundImage imageType={'logo'} />
     </section>
   </div>
@@ -76,5 +94,8 @@
   }
   .textInput--sm {
     font-size: var(--font-size-3);
+  }
+  .recodingActive {
+    background-color: var(--brand);
   }
 </style>
