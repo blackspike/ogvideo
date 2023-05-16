@@ -1,6 +1,6 @@
 # Svelte video machine!
 
-![screenshot](static/1200x630.png)
+<video src="static/svelte-app-demo.mp4" poster="static/1200x630.png" controls title="Title"></video>
 
 ## Demo
 
@@ -9,6 +9,7 @@ https://social-video-machine.netlify.app
 This is a project to learn [Svelte.js](https://svelte.dev)!
 
 It's for producing short blog intro videos
+
 
 ## Uses
 
