@@ -2,6 +2,8 @@
 
 <video src="/static/svelte-app-demo.mp4" poster="/static/1200x630.png" muted playsinline controls title="Title"></video>
 
+https://github.com/blackspike/social-video-machine/static/svelte-app-demo.mp4
+
 ## Demo
 
 https://social-video-machine.netlify.app
