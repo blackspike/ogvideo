@@ -1,6 +1,6 @@
 # Svelte video machine!
 
-https://github.com/blackspike/social-video-machine/blob/main/static/svelte-app-demo.mp4
+https://raw.githubusercontent.com/blackspike/social-video-machine/main/static/svelte-app-demo.mp4
 
 ## Demo
 
