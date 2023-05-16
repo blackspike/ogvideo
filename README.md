@@ -1,8 +1,6 @@
 # Svelte video machine!
 
-<video src="/static/svelte-app-demo.mp4" poster="/static/1200x630.png" muted playsinline controls title="Title"></video>
-
-https://github.com/blackspike/social-video-machine/static/svelte-app-demo.mp4
+https://github.com/blackspike/social-video-machine/blob/main/static/svelte-app-demo.mp4
 
 ## Demo
 
