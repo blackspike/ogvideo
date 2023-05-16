@@ -29,7 +29,7 @@
       <span class="hstack gap-3">
         <button on:click={play}>Play</button>
         <!-- <button on:click={reset}>Reset</button> -->
-        <button on:click={record} class:recodingActive disabled={$recording}>
+        <button on:click={record} class:recodingActive>
           {$recording ? 'Recording…' : 'Record Video'}
         </button>
       </span>

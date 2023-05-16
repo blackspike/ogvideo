@@ -113,6 +113,11 @@
 
   // Play
   export function play() {
+    // Reset opacity
+    titleText.opacity = 0
+    subtitleText.opacity = 0
+    canvas.requestRenderAll()
+
     // re-init timeline
     animTimeline = anime.timeline({
       update: function () {
@@ -131,17 +136,16 @@
       subtitleTextTop: subtitleText.top
     }
 
-    // animTimeline.reset()
-
     // TextTyper
     let interval
-    let typingTime = 0
-    let count = $title.length
-    let typingPause = 20
-    typingTime = typingPause * count
+    const count = $title.length
+    const typingPause = 20
+    let typingTime = typingPause * count
 
-    titleText.opacity = 0
-    subtitleText.opacity = 0
+    // Time to read subtitle
+    const words = $subtitle.split(' ').length
+    const wordPerSec = 200 / 60 // av reading speed 200 wpm / 60 s
+    const subtitleReadingTime = Math.round(words * wordPerSec * 100)
 
     bgAnim = anime({
       targets: bgImage,
@@ -156,7 +160,7 @@
     animTimeline
       .add({
         targets: titleText,
-        opacity: [0, 1],
+        opacity: 1,
         top: '-=30',
         easing: 'easeOutQuad',
         duration: 1000,
@@ -197,10 +201,10 @@
           targets: mask,
           opacity: [0, 1],
           easing: 'linear',
-          duration: 500,
+          duration: 250,
           complete: () => console.log('complete 3')
         },
-        `+=${typingTime + 2000}`
+        `+=${subtitleReadingTime / 1.5}`
       )
       .add({
         targets: logoImage,
@@ -208,8 +212,8 @@
         scaleX: logoImage.scaleX + 0.1,
         scaleY: logoImage.scaleY + 0.1,
         easing: 'easeInOutSine',
-        duration: 500,
-        delay: 500,
+        duration: 250,
+        delay: 250,
         complete: () => console.log('complete 4')
       })
       .add({
@@ -218,8 +222,8 @@
         scaleX: logoImage.scaleX + 0.2,
         scaleY: logoImage.scaleY + 0.2,
         easing: 'easeOutCubic',
-        duration: 500,
-        delay: 2500,
+        duration: 250,
+        delay: 2000,
         complete: () => console.log('complete 5')
       })
       .add({
@@ -229,9 +233,26 @@
         duration: 10,
         complete: () => console.log('complete 6')
       })
+
       .add({
-        targets: [titleText, subtitleText],
-        opacity: 1,
+        targets: subtitleText,
+        opacity: [0, 1],
+        top: orig.subtitleTextTop,
+        duration: 500,
+        easing: 'easeOutCubic',
+        complete: () => console.log('complete 7')
+      })
+      .add(
+        {
+          targets: titleText,
+          opacity: [0, 1],
+          top: orig.titleTextTop,
+          duration: 500,
+          easing: 'easeOutCubic'
+        },
+        '-=500'
+      )
+      .add({
         duration: 10,
         complete: () => {
           // Reset
@@ -240,8 +261,6 @@
           clearInterval(interval)
           logoImage.scaleX = orig.logoScaleX
           logoImage.scaleY = orig.logoScaleY
-          titleText.top = orig.titleTextTop
-          subtitleText.top = orig.subtitleTextTop
         }
       })
   }
@@ -372,7 +391,7 @@
     setTimeout(function () {
       mediaRecorder.stop()
       $recording = false
-    }, animTimeline.duration - 1000)
+    }, animTimeline.duration)
   }
 </script>
 
