@@ -1,6 +1,6 @@
 # Svelte video machine!
 
-https://social-video-machine.netlify.app/svelte-app-demo.mp4
+<video src="https://social-video-machine.netlify.app/svelte-app-demo.mp4">
 
 ## Demo
 
