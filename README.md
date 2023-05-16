@@ -1,6 +1,6 @@
 # Svelte video machine!
 
-<video src="static/svelte-app-demo.mp4" poster="static/1200x630.png" controls title="Title"></video>
+![screenshot](static/1200x630.png)
 
 ## Demo
 
