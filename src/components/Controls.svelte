@@ -30,7 +30,7 @@
         <button on:click={play}>Play</button>
         <!-- <button on:click={reset}>Reset</button> -->
         <button on:click={record} class:recodingActive>
-          {$recording ? 'Recording…' : 'Record Video'}
+          {$recording ? 'Recording…' : 'Create Video'}
         </button>
       </span>
       <h1>Social Video Maker</h1>

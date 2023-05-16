@@ -360,7 +360,6 @@
 
   // Record
   export async function record() {
-    // reset()
     play()
     $video = null
     console.log('record called')
