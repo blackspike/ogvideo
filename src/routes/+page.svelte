@@ -14,17 +14,12 @@
     font.load().then(() => (fontLoaded = true))
   })
 
-  let canvas, controls, sorry
+  let canvas, controls
   const play = () => canvas.play()
   const reset = () => canvas.reset()
   const record = () => canvas.record()
 </script>
 
-{#if !sorry}
-  <button class="sorry" on:click={() => (sorry = true)}>
-    This app only fits on large screens :(
-  </button>
-{/if}
 <main>
   <div class="canvas">
     {#if fontLoaded && logoImage}
@@ -37,37 +32,36 @@
 
   <footer class="hstack gap-3">
     <a class="btn credits" href="https://www.blackspike.com">by blackspike.com</a>
-    <a class="btn credits" href="/demo.mp4">Demo</a>
+    <a class="btn credits" href="/demo.mp4">Example</a>
     <a class="btn credits" href="https://github.com/blackspike/social-video-machine">GitHub</a>
   </footer>
   <VideoDialog />
 </main>
 
 <style lang="scss">
-  .sorry {
-    grid-template-columns: 1/-1;
-    margin-block-start: var(--size-5);
-    margin-inline-start: var(--size-5);
-    background-color: var(--brand);
-    color: var(--gray-12);
-  }
-
   main {
-    height: 100vh;
-    max-width: 90rem;
-    margin-inline: auto;
+    margin: auto;
     display: grid;
-    gap: var(--size-5);
+    gap: var(--size-5) var(--size-1);
     padding: var(--size-5);
     display: grid;
-    grid-template-columns: auto 1fr;
+    overflow-x: hidden;
+    grid-template-areas: 'canvas' 'controls' ' footer';
+  }
+
+  @media screen and (min-width: 70rem) {
+    main {
+      grid-template-columns: auto 1fr;
+      grid-template-areas: 'canvas controls' 'footer footer';
+    }
+  }
+
+  .canvas {
+    grid-area: canvas;
+    align-self: center;
   }
   .credits {
+    grid-area: footer;
     background-color: var(--gray-9);
-  }
-  @media screen and (min-width: 80rem) {
-    .sorry {
-      display: none;
-    }
   }
 </style>
