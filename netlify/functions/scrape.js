@@ -28,11 +28,9 @@ export async function handler(event, context) {
       .catch((err) => console.error(err))
 
 
-    // const response = await axios.get(meta.bg)
-    // const blob = await response.blob()
-    // const imageFile = URL.createObjectURL(blob)
-    // console.log(bgImageUrl)
-
+      const response = await axios(meta.bgImage, { responseType: 'arraybuffer' })
+      const buffer64 = Buffer.from(response.data, 'binary').toString('base64')
+       meta.bgImage = buffer64
 
     return {
       statusCode: 200,
