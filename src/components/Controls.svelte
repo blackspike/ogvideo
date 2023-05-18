@@ -10,6 +10,8 @@
     recording
   } from '../store.js'
   import BackgroundImage from '../components/BackgroundImage.svelte'
+  import Scrape from '../components/Scrape.svelte'
+
   import { createEventDispatcher } from 'svelte'
   const dispatch = createEventDispatcher()
 
@@ -34,6 +36,12 @@
         </button>
       </span>
       <h1>Social Video Maker</h1>
+    </section>
+    <!-- scrape -->
+    <section class="panel controls__scrape">
+      <div class="scrape">
+        <Scrape />
+      </div>
     </section>
     <!-- Title -->
     <section class="panel controls__title vstack gap-3">

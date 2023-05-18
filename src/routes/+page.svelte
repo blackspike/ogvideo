@@ -2,7 +2,6 @@
   import '../assets/css/main.scss'
   import Controls from '../components/Controls.svelte'
   import Canvas from '../components/Canvas.svelte'
-  import Scrape from '../components/Scrape.svelte'
   import VideoDialog from '../components/VideoDialog.svelte'
   import FontFaceObserver from 'fontfaceobserver'
   import { onMount } from 'svelte'
@@ -39,9 +38,6 @@
     <a class="btn credits" href="https://github.com/blackspike/social-video-machine">GitHub</a>
   </footer>
 
-  <div class="scrape">
-    <Scrape />
-  </div>
   <VideoDialog />
 </main>
 
@@ -53,13 +49,13 @@
     padding: var(--size-5);
     display: grid;
     overflow-x: hidden;
-    grid-template-areas: 'canvas' 'scrape' 'controls' 'footer';
+    grid-template-areas: 'canvas' 'scrape' 'footer';
   }
 
   @media screen and (min-width: 70rem) {
     main {
       grid-template-columns: auto 1fr;
-      grid-template-areas: 'canvas controls' 'footer scrape';
+      grid-template-areas: 'canvas controls' 'footer footer';
     }
   }
 

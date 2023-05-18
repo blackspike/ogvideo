@@ -32,12 +32,6 @@
 </div>
 
 <style>
-  .scraper {
-    padding: var(--size-2);
-    border-radius: var(--radius-2);
-    background-color: var(--gray-9);
-    z-index: var(--layer-3);
-  }
   input {
     font-size: var(--font-size-2);
   }
