@@ -3,9 +3,8 @@ import axios from 'axios'
 
 export async function handler(event, context) {
   try {
-    const url =
-      event.queryStringParameters.url ||
-      'https://www.blackspike.com/blog/why-we-chose-astro-over-nuxt/'
+
+    const {url} = JSON.parse(event.body) || 'https://www.blackspike.com/blog/why-we-chose-astro-over-nuxt/'
 
     const meta = {
       title: '',
@@ -27,6 +26,7 @@ export async function handler(event, context) {
       })
       .catch((err) => console.error(err))
 
+      // quick hack to fetch and convert remote cors image to base64
       if(meta.bgImage)  {
         const response = await axios(meta.bgImage, { responseType: 'arraybuffer' })
         const buffer64 = Buffer.from(response.data, 'binary').toString('base64')

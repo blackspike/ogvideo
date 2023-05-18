@@ -6,7 +6,10 @@
   let url = ''
 
   const scraper = async () => {
-    const res = await fetch(`/.netlify/functions/scrape?url=${url}`)
+    const res = await fetch(`/.netlify/functions/scrape?url=${url}`, {
+      method: 'POST',
+      body: JSON.stringify({ url })
+    })
     const meta = await res.json()
 
     if (res.ok) {

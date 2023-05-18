@@ -124,7 +124,4 @@
   .recodingActive {
     background-color: var(--brand);
   }
-  .credits {
-    background-color: var(--gray-9);
-  }
 </style>
