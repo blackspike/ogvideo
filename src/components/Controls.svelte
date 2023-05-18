@@ -10,6 +10,7 @@
     recording
   } from '../store.js'
   import BackgroundImage from '../components/BackgroundImage.svelte'
+  import Footer from '../components/Footer.svelte'
   import Scrape from '../components/Scrape.svelte'
 
   import { createEventDispatcher } from 'svelte'
@@ -89,6 +90,10 @@
       <BackgroundImage imageType={'bg'} />
       <BackgroundImage imageType={'logo'} />
     </section>
+    <!-- footer -->
+    <section class="panel controls__footer">
+      <Footer />
+    </section>
   </div>
 </div>
 
@@ -118,5 +123,8 @@
   }
   .recodingActive {
     background-color: var(--brand);
+  }
+  .credits {
+    background-color: var(--gray-9);
   }
 </style>

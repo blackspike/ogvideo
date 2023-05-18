@@ -32,12 +32,6 @@
     </div>
   {/if}
 
-  <footer class="footer hstack gap-3">
-    <a class="btn credits" href="https://www.blackspike.com">by blackspike.com</a>
-    <a class="btn credits" href="/demo.mp4">Example</a>
-    <a class="btn credits" href="https://github.com/blackspike/social-video-machine">GitHub</a>
-  </footer>
-
   <VideoDialog />
 </main>
 
@@ -49,13 +43,16 @@
     padding: var(--size-5);
     display: grid;
     overflow-x: hidden;
-    grid-template-areas: 'canvas' 'scrape' 'footer';
+    grid-template-areas: 'canvas' 'controls';
   }
 
   @media screen and (min-width: 70rem) {
     main {
-      grid-template-columns: auto 1fr;
-      grid-template-areas: 'canvas controls' 'footer footer';
+      display: flex;
+      gap: var(--size-9);
+      justify-content: center;
+      height: 100%;
+      align-items: center;
     }
   }
 
@@ -65,11 +62,6 @@
   .canvas {
     grid-area: canvas;
     align-self: center;
-  }
-  .credits {
-    background-color: var(--gray-9);
-  }
-  .footer {
-    grid-area: footer;
+    justify-self: center;
   }
 </style>

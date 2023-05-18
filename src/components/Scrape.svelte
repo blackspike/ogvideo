@@ -2,7 +2,7 @@
   import { title, bgImage, subtitle, bg } from '../store.js'
 
   let fetchedData
-  let url = 'https://www.blackspike.com/blog/firefox-get-info/'
+  let url = ''
 
   const scraper = async () => {
     const res = await fetch(`/.netlify/functions/scrape?url=${url}`)
@@ -27,8 +27,8 @@
 </script>
 
 <div class="scraper hstack gap-2">
-  <input type="url" bind:value={url} />
-  <button on:click={scraper}>fetch</button>
+  <input type="url" bind:value={url} placeholder="Enter blog post URL" />
+  <button on:click={scraper} disabled={url === '  '}>fetch</button>
 </div>
 
 <style>
