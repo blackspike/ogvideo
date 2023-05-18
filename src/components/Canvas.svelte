@@ -96,13 +96,23 @@
 
   // Reset
   export function reset() {
-    animTimeline.pause()
-    animTimeline.seek(animTimeline.duration - 1)
+    console.log('reset')
 
-    titleText.top += 30
+    if (bgAnim) {
+      bgAnim.seek(0)
+      bgAnim.pause()
+    }
+    if (animTimeline) {
+      animTimeline.pause()
+      animTimeline.seek(0)
+      animTimeline = null
+    }
+
+    // titleText.top += 30
     titleText.opacity = 1
-    subtitleText.top += 30
+    // subtitleText.top += 30
     subtitleText.opacity = 1
+    canvas.requestRenderAll()
     const mask = canvas.getObjects().find((obj) => obj.id === 'mask')
     const logoImage = canvas.getObjects().find((obj) => obj.id === 'logoImage')
     const bgImage = canvas.getObjects().find((obj) => obj.id === 'bgImage')
@@ -150,12 +160,13 @@
     bgAnim = anime({
       targets: bgImage,
       left: [0, canvasSize - bgImage.aCoords.tr.x],
-      duration: 20000,
+      duration: 30000,
       loop: true,
-      easing: 'linear',
+      easing: 'easeInOutQuad',
       direction: 'alternate'
     })
 
+    titleText.set('text', '')
     // Timeline
     animTimeline
       .add({
@@ -201,10 +212,9 @@
           targets: mask,
           opacity: [0, 1],
           easing: 'linear',
-          duration: 250,
-          complete: () => console.log('complete 3')
+          duration: 250
         },
-        `+=${subtitleReadingTime / 1.5}`
+        `+=${subtitleReadingTime / 1.2}`
       )
       .add({
         targets: logoImage,
@@ -223,44 +233,34 @@
         scaleY: logoImage.scaleY + 0.2,
         easing: 'easeOutCubic',
         duration: 250,
-        delay: 2000,
-        complete: () => console.log('complete 5')
+        delay: 2000
       })
       .add({
-        delay: 1000,
-        targets: [mask, logoImage],
+        complete: () => {
+          console.log('complete 3')
+          // Reset bg
+          bgAnim.seek(0)
+          bgAnim.pause()
+          // fade text
+          titleText.opacity = 0
+          subtitleText.opacity = 0
+          subtitleText.set('top', orig.subtitleTextTop)
+          titleText.set('top', orig.titleTextTop)
+        }
+      })
+      .add({
+        targets: mask,
         opacity: 0,
-        duration: 10,
-        complete: () => console.log('complete 6')
-      })
-
-      .add({
-        targets: subtitleText,
-        opacity: [0, 1],
-        top: orig.subtitleTextTop,
-        duration: 500,
-        easing: 'easeOutCubic',
-        complete: () => console.log('complete 7')
-      })
-      .add(
-        {
-          targets: titleText,
-          opacity: [0, 1],
-          top: orig.titleTextTop,
-          duration: 500,
-          easing: 'easeOutCubic'
-        },
-        '-=500'
-      )
-      .add({
-        duration: 10,
+        duration: 1000,
+        easing: 'linear',
         complete: () => {
           // Reset
-          console.log('complete 7 final')
+          console.log('complete 6 final')
           animTimeline = null
           clearInterval(interval)
           logoImage.scaleX = orig.logoScaleX
           logoImage.scaleY = orig.logoScaleY
+          reset()
         }
       })
   }
@@ -390,6 +390,7 @@
     setTimeout(function () {
       mediaRecorder.stop()
       $recording = false
+      reset()
     }, animTimeline.duration)
   }
 </script>
