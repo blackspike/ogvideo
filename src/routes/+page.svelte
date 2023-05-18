@@ -2,6 +2,7 @@
   import '../assets/css/main.scss'
   import Controls from '../components/Controls.svelte'
   import Canvas from '../components/Canvas.svelte'
+  import Scrape from '../components/Scrape.svelte'
   import VideoDialog from '../components/VideoDialog.svelte'
   import FontFaceObserver from 'fontfaceobserver'
   import { onMount } from 'svelte'
@@ -27,14 +28,20 @@
     {/if}
   </div>
   {#if fontLoaded}
-    <Controls bind:this={controls} on:play={play} on:reset={reset} on:record={record} />
+    <div class="controls">
+      <Controls bind:this={controls} on:play={play} on:reset={reset} on:record={record} />
+    </div>
   {/if}
 
-  <footer class="hstack gap-3">
+  <footer class="footer hstack gap-3">
     <a class="btn credits" href="https://www.blackspike.com">by blackspike.com</a>
     <a class="btn credits" href="/demo.mp4">Example</a>
     <a class="btn credits" href="https://github.com/blackspike/social-video-machine">GitHub</a>
   </footer>
+
+  <div class="scrape">
+    <Scrape />
+  </div>
   <VideoDialog />
 </main>
 
@@ -46,22 +53,27 @@
     padding: var(--size-5);
     display: grid;
     overflow-x: hidden;
-    grid-template-areas: 'canvas' 'controls' ' footer';
+    grid-template-areas: 'canvas' 'scrape' 'controls' 'footer';
   }
 
   @media screen and (min-width: 70rem) {
     main {
       grid-template-columns: auto 1fr;
-      grid-template-areas: 'canvas controls' 'footer footer';
+      grid-template-areas: 'canvas controls' 'footer scrape';
     }
   }
 
+  .controls {
+    grid-area: controls;
+  }
   .canvas {
     grid-area: canvas;
     align-self: center;
   }
   .credits {
-    grid-area: footer;
     background-color: var(--gray-9);
+  }
+  .footer {
+    grid-area: footer;
   }
 </style>

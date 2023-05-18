@@ -36,3 +36,20 @@ body {
   border-radius: var(--radius-2);
   background-color: var(--gray-9);
 }
+
+input:not([type=range], [type=color]),
+textarea {
+  width: 100%;
+  background-color: var(--gray-12);
+  color: var(--gray-0);
+  padding: var(--size-2);
+  font-size: var(--font-size-4);
+  line-height: 1.2;
+  border-radius: var(--radius-2);
+  border: 0;
+}
+
+input:not([type=range], [type=color]):focus,
+textarea:focus {
+  outline: 1px solid var(--gray-8);
+}

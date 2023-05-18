@@ -102,20 +102,9 @@
     gap: var(--size-2);
   }
   .textInput {
-    width: 100%;
-    background-color: var(--gray-12);
-    color: var(--gray-0);
-    padding: var(--size-2);
-    font-size: var(--font-size-4);
     min-height: 6rem;
-    line-height: 1.2;
-    border-radius: var(--radius-2);
-    border: 0;
   }
 
-  .textInput:focus {
-    outline: 1px solid var(--gray-8);
-  }
   .textInput--sm {
     font-size: var(--font-size-3);
   }
