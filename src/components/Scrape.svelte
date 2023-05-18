@@ -1,5 +1,6 @@
 <script>
   import { title, bgImage, subtitle, bg } from '../store.js'
+  import { onMount } from 'svelte'
 
   let fetchedData
   let url = ''
@@ -24,6 +25,15 @@
       throw new Error(meta)
     }
   }
+
+  onMount(() => {
+    const params = new URLSearchParams(location.search)
+    const urlParam = params.get('url')
+    if (urlParam) {
+      url = urlParam
+      scraper()
+    }
+  })
 </script>
 
 <div class="scraper hstack gap-2">

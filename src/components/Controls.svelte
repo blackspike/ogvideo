@@ -119,7 +119,7 @@
   }
 
   .textInput--sm {
-    font-size: var(--font-size-3);
+    font-size: var(--font-size-2);
   }
   .recodingActive {
     background-color: var(--brand);
