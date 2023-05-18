@@ -4,3 +4,6 @@
 
 [dev]
   autoLaunch = false
+
+[functions]
+  node_bundler = "esbuild"

@@ -40,7 +40,7 @@
 </script>
 
 <div class="scraper hstack gap-2">
-  <input type="url" bind:value={url} placeholder="Enter blog post URL" />
+  <input type="url" bind:value={url} placeholder="Autofill via URL (beta)" />
   <button on:click={scraper} disabled={url === '  '}>fetch</button>
 </div>
 
