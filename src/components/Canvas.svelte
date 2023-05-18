@@ -14,7 +14,8 @@
     bgOpacity,
     logoImage,
     recording,
-    video
+    video,
+    playing
   } from '../store.js'
 
   export let font
@@ -97,6 +98,7 @@
   // Reset
   export function reset() {
     console.log('reset')
+    $playing = false
 
     if (bgAnim) {
       bgAnim.seek(0)

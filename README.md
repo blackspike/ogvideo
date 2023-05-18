@@ -1,10 +1,10 @@
-# Svelte video machine!
+# OG Video - a Svelte video machine!
 
 ![screenshot](static/1200x630.png)
 
 ## Demo
 
-https://social-video-machine.netlify.app
+https://ogvideo.app
 
 This is a project to learn [Svelte.js](https://svelte.dev)!
 

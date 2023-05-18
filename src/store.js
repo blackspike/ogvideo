@@ -1,5 +1,6 @@
 import { writable, readable, derived } from 'svelte/store'
 
+export const playing = writable(false)
 export const recording = writable(false)
 export const video = writable(null)
 export const showDialog = writable(false)

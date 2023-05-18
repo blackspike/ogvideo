@@ -1,5 +1,4 @@
 <script>
-  import '../assets/css/main.scss'
   import Controls from '../components/Controls.svelte'
   import Canvas from '../components/Canvas.svelte'
   import VideoDialog from '../components/VideoDialog.svelte'
@@ -49,7 +48,7 @@
   @media screen and (min-width: 70rem) {
     main {
       display: flex;
-      gap: var(--size-9);
+      gap: 3vw;
       justify-content: center;
       height: 100%;
       align-items: center;

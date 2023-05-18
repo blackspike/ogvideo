@@ -3,6 +3,17 @@
 @import './_stacks';
 @import './_fonts';
 
+.visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
 :root {
   --brand: #ff00ff;
 }
@@ -14,7 +25,6 @@
   position: relative;
   font-family: var(--font-sans);
   font-family: 'Satoshi-Bold';
-  line-height: 1;
 }
 
 html,
@@ -29,6 +39,10 @@ body {
   // display: flex;
   // justify-content: center;
   // align-items: center;
+}
+
+a {
+  color: var(--brand);
 }
 
 .panel {
