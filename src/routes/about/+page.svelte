@@ -74,5 +74,6 @@
   p,
   dd {
     font-family: 'Inter';
+    color: var(--gray-3);
   }
 </style>

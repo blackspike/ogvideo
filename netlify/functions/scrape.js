@@ -4,7 +4,8 @@ import axios from 'axios'
 export async function handler(event, context) {
   try {
 
-    const {url} = JSON.parse(event.body) || 'https://www.blackspike.com/blog/why-we-chose-astro-over-nuxt/'
+    const data = JSON.parse(event.body)
+    const url = data.url || 'https://www.blackspike.com/blog/why-we-chose-astro-over-nuxt/'
 
     const meta = {
       title: '',
