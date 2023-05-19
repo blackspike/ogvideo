@@ -10,5 +10,7 @@ export const bgOutro = writable('#1e1e1e')
 export const fg = writable('#eeeeee')
 export const sizeTitle = writable(46)
 export const sizeSubtitle = writable(30)
-export const title = writable('Project folder structure with Quick Actions')
-export const subtitle = writable('Use Automator to instantly set up a new project folder structure right from the finder context menu')
+export const title = writable('Create a short video for your blog post to share on social media.')
+export const subtitle = writable(
+  'You can add custom text, colours, your logo and a background image. If you pop your url in the box over there, it will auto-fill the content. Then just click Create Video!'
+)

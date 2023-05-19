@@ -40,6 +40,10 @@
   }
 
   onMount(() => {
+    const params = new URLSearchParams(location.search)
+    const colorParam = params.get('color')
+    colorParam ? ($bg = '#' + colorParam) : null
+
     // Create (static) canvas
     canvas = new fabric.StaticCanvas('canvas', {
       backgroundColor: $bg,
