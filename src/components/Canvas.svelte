@@ -66,6 +66,8 @@
       .then((res) => res.blob())
       .then((blob) => ($bgImage = URL.createObjectURL(blob)))
 
+    canvas.renderAll()
+
     // Subtitle
     subtitleText = new fabric.Textbox($subtitle, {
       ...textDefaults,
@@ -338,8 +340,6 @@
       img.id = 'bgImage'
       canvas.insertAt(img, layers.BG)
     })
-
-    canvas.requestRenderAll()
   }
 
   function updateBgImageOpacity() {
