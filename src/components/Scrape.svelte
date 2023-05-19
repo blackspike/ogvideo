@@ -39,10 +39,10 @@
   })
 </script>
 
-<div class="scraper hstack gap-2">
+<form class="scraper hstack gap-2" on:submit|preventDefault={scraper}>
   <input type="url" bind:value={url} placeholder="Enter your webpage URL (beta)" />
   <button on:click={scraper} disabled={url === '  '}>fetch</button>
-</div>
+</form>
 
 <style>
   input {

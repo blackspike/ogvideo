@@ -5,7 +5,8 @@ export async function handler(event, context) {
   try {
 
     const data = JSON.parse(event.body)
-    const url = data.url || 'https://www.blackspike.com/blog/why-we-chose-astro-over-nuxt/'
+    let url = data.url || 'https://www.blackspike.com/blog/why-we-chose-astro-over-nuxt/'
+
 
     const meta = {
       title: '',
@@ -21,8 +22,17 @@ export async function handler(event, context) {
 
         meta.title = $('meta[property="og:title"]').attr('content')
         meta.subtitle = $('meta[property="og:description"]').attr('content')
-        meta.bgImage = $('meta[property="og:image"]').attr('content')
         meta.bg = $('meta[property="theme-color"]').attr('content')
+
+       const bgImage = $('meta[property="og:image"]').attr('content')
+
+       //  If its a relative path try concatenating
+       if (!bgImage.startsWith('http')) {
+          const realUrl = new URL(url)
+          meta.bgImage = realUrl.origin + bgImage
+        } else {
+          meta.bgImage = bgImage
+        }
 
       })
       .catch((err) => console.error(err))
