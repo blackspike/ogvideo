@@ -1,6 +1,6 @@
 # OG Video - a Svelte video machine!
 
-![screenshot](static/1200x630.png)
+![screenshot](static/1200x630.jpg)
 
 ## Demo
 
