@@ -18,7 +18,7 @@
       fetchedData = meta
       $title = meta.title ? meta.title : $title
       $subtitle = meta.subtitle ? meta.subtitle : $subtitle
-      $bg = meta.bg ? meta.bg : '#1e1e1e'
+      meta.bg ? ($bg = meta.bg) : null
 
       if (meta.bgImage) {
         const blobFromBase64 = await fetch(
@@ -36,6 +36,7 @@
   onMount(() => {
     const params = new URLSearchParams(location.search)
     const urlParam = params.get('url')
+
     if (urlParam) {
       url = urlParam
       scraper()

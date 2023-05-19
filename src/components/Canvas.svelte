@@ -45,6 +45,7 @@
       backgroundColor: $bg,
       preserveObjectStacking: true
     })
+
     // Set logo image
     // Get logo from local storage
     const localStorageBase64ToBlob = async (data) => {
