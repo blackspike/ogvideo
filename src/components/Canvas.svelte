@@ -45,11 +45,23 @@
       backgroundColor: $bg,
       preserveObjectStacking: true
     })
-    // Set images
-    fetch('/blackspike-logo.png')
-      .then((res) => res.blob())
-      .then((blob) => ($logoImage = URL.createObjectURL(blob)))
+    // Set logo image
+    // Get logo from local storage
+    const localStorageBase64ToBlob = async (data) => {
+      const blobFromBase64 = await fetch(data).then((res) => res.blob())
+      $logoImage = URL.createObjectURL(blobFromBase64)
+    }
 
+    if (localStorage.getItem('logo')) {
+      const logoFromStorage = localStorage.getItem('logo')
+      localStorageBase64ToBlob(logoFromStorage)
+    } else {
+      fetch('/blackspike-logo.png')
+        .then((res) => res.blob())
+        .then((blob) => ($logoImage = URL.createObjectURL(blob)))
+    }
+
+    // Set bg image
     fetch('/temp.webp')
       .then((res) => res.blob())
       .then((blob) => ($bgImage = URL.createObjectURL(blob)))
@@ -315,11 +327,10 @@
   $: $bgOpacity, updateBgImageOpacity()
 
   function updateBgImage() {
-    console.log('updateBgImage')
-
     if (!canvas || !$bgImage) return
     const currentImage = canvas.getObjects().find((obj) => obj.id === 'bgImage')
     canvas.remove(currentImage)
+    canvas.requestRenderAll()
 
     fabric.Image.fromURL($bgImage, (img) => {
       img.set({ opacity: $bgOpacity })
@@ -327,6 +338,8 @@
       img.id = 'bgImage'
       canvas.insertAt(img, layers.BG)
     })
+
+    canvas.requestRenderAll()
   }
 
   function updateBgImageOpacity() {

@@ -26,17 +26,6 @@
   // Initialise logo from storage
   onMount(() => {
     if (imageType !== 'logo') return
-    // Get logo from local storage
-    const localStorageBase64ToBlob = async (data) => {
-      const blobFromBase64 = await fetch(data).then((res) => res.blob())
-      $logoImage = URL.createObjectURL(blobFromBase64)
-      imageFile = $logoImage
-    }
-
-    if (localStorage.getItem('logo')) {
-      const logoFromStorage = localStorage.getItem('logo')
-      localStorageBase64ToBlob(logoFromStorage)
-    }
   })
 
   // Handle image uploads
@@ -55,6 +44,8 @@
     imageType === 'bg' ? ($bgImage = imageFile) : ($logoImage = imageFile)
     saveToStorage(files[0], imageType)
   }
+
+  $: watermark = imageType === 'bg' ? $bgImage : $logoImage
 </script>
 
 <div
@@ -64,7 +55,9 @@
   on:dragleave={() => (dragOver = false)}
   on:drop={handleDragDrop}
   ondragover="return false"
-  style="--bg: url({imageFile ? imageFile : ''})"
+  style="--bg: url({watermark ? watermark : ''}); background-size: {imageType === 'bg'
+    ? 'cover'
+    : 'contain'}"
 >
   <form class="dropzone-form">
     <input
@@ -94,8 +87,8 @@
     background-image: var(--bg);
     background-position: center center;
     background-repeat: no-repeat;
-    background-size: contain;
-    opacity: 0.1;
+    background-size: inherit;
+    opacity: 0.2;
     bottom: 0;
     content: '';
     left: 0;

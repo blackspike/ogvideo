@@ -2,10 +2,12 @@
   import { title, bgImage, subtitle, bg } from '../store.js'
   import { onMount } from 'svelte'
 
-  let fetchedData
+  let fetchedData, fetching
   let url = ''
 
   const scraper = async () => {
+    fetching = true
+
     const res = await fetch(`/.netlify/functions/scrape?url=${url}`, {
       method: 'POST',
       body: JSON.stringify({ url })
@@ -24,7 +26,9 @@
         ).then((res) => res.blob())
         $bgImage = URL.createObjectURL(blobFromBase64)
       }
+      fetching = false
     } else {
+      fetching = false
       throw new Error(meta)
     }
   }
@@ -39,13 +43,25 @@
   })
 </script>
 
-<form class="scraper hstack gap-2" on:submit|preventDefault={scraper}>
+<form class="scraper hstack gap-2" on:submit|preventDefault={scraper} class:fetching>
   <input type="url" bind:value={url} placeholder="Enter your webpage URL (beta)" />
-  <button on:click={scraper} disabled={url === '  '}>fetch</button>
+  <button class="fetch-btn" on:click={scraper} disabled={url === '  '}>
+    {fetching ? 'Fetching…' : 'Fetch'}
+  </button>
 </form>
 
 <style>
+  .fetching {
+    pointer-events: none;
+    opacity: 0.3;
+    transition: all 0.3s var(--ease-in-out-3);
+  }
+
   input {
     font-size: var(--font-size-2);
+  }
+
+  .fetch-btn {
+    min-width: 7rem;
   }
 </style>

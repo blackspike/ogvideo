@@ -58,6 +58,7 @@
       display: flex;
       flex-direction: row;
       justify-content: center;
+      gap: 0;
       height: 100%;
       align-items: center;
     }
