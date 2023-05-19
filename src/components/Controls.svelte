@@ -10,7 +10,7 @@
     recording,
     playing
   } from '../store.js'
-  import BackgroundImage from '../components/BackgroundImage.svelte'
+  import ImageUploader from '../components/ImageUploader.svelte'
   import Scrape from '../components/Scrape.svelte'
 
   import { createEventDispatcher } from 'svelte'
@@ -137,10 +137,10 @@
         <input class="visually-hidden bg" type="color" id="bg" bind:value={$bg} />
       </label>
     </section>
-    <!-- BackgroundImage -->
+    <!-- ImageUploader -->
     <section class="controls__background-image hstack gap-1">
-      <BackgroundImage imageType={'bg'} />
-      <BackgroundImage imageType={'logo'} />
+      <ImageUploader imageType={'bg'} />
+      <ImageUploader imageType={'logo'} />
     </section>
   </div>
 </div>

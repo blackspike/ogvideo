@@ -7,20 +7,53 @@
   let files
   let imageFile
 
-  // Initialise logo
-  onMount(() => {})
+  // save to storage
+  const saveToStorage = async (file, type) => {
+    const reader = new FileReader()
 
+    // convert image file to base64 string and save to localStorage
+    reader.addEventListener(
+      'load',
+      function () {
+        localStorage.setItem(type, reader.result)
+      },
+      false
+    )
+
+    if (file) reader.readAsDataURL(file)
+  }
+
+  // Initialise logo from storage
+  onMount(() => {
+    if (imageType !== 'logo') return
+    // Get logo from local storage
+    const localStorageBase64ToBlob = async (data) => {
+      const blobFromBase64 = await fetch(data).then((res) => res.blob())
+      $logoImage = URL.createObjectURL(blobFromBase64)
+      imageFile = $logoImage
+    }
+
+    if (localStorage.getItem('logo')) {
+      const logoFromStorage = localStorage.getItem('logo')
+      localStorageBase64ToBlob(logoFromStorage)
+    }
+  })
+
+  // Handle image uploads
   $: if (files) {
     imageFile = URL.createObjectURL(files[0])
     localStorage.setItem('blob', imageFile)
     imageType === 'bg' ? ($bgImage = imageFile) : ($logoImage = imageFile)
+    saveToStorage(files[0], imageType)
   }
 
+  // Handle image drag
   function handleDragDrop(e) {
     e.preventDefault()
     const uploadedFile = e.dataTransfer.files
     imageFile = URL.createObjectURL(uploadedFile[0])
     imageType === 'bg' ? ($bgImage = imageFile) : ($logoImage = imageFile)
+    saveToStorage(files[0], imageType)
   }
 </script>
 
@@ -61,7 +94,7 @@
     background-image: var(--bg);
     background-position: center center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
     opacity: 0.1;
     bottom: 0;
     content: '';

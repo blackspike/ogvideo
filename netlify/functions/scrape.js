@@ -27,7 +27,7 @@ export async function handler(event, context) {
        const bgImage = $('meta[property="og:image"]').attr('content')
 
        //  If its a relative path try concatenating
-       if (!bgImage.startsWith('http')) {
+       if (bgImage && !bgImage.startsWith('http')) {
           const realUrl = new URL(url)
           meta.bgImage = realUrl.origin + bgImage
         } else {
