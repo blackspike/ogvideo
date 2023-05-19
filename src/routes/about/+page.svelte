@@ -13,8 +13,12 @@
     </section>
 
     <!-- footer -->
-    <div class="panel">
-      <Footer />
+    <div class="panel panel-sm">
+      <Footer>
+        <a class="btn credits" href="/demo.mp4">Example Video</a>
+        <a class="btn credits" href="https://github.com/blackspike/ogvideo">Source on GitHub</a>
+        <a class="btn credits" href="https://www.blackspike.com">by blackspike.com</a>
+      </Footer>
     </div>
     <!-- Faq -->
     <section class="vstack gap-3">
@@ -28,6 +32,25 @@
         <div class="panel vstack gap-2">
           <dt>There's a weird bug</dt>
           <dd>Try reloading the page!</dd>
+        </div>
+
+        <div class="panel vstack gap-2">
+          <dt>Can I add posts via query parameter</dt>
+          <dd>
+            <p>Why yes! Just add <code>?url=https://yoursite.com</code> to the url</p>
+
+            <p>
+              <a href="https://ogvideo.app/?url=https://www.bbc.co.uk/news/business-65644340"
+                >ogvideo.app/?url=https://bbc.co.uk</a
+              >
+            </p>
+            <p>
+              <a
+                href="https://ogvideo.app/?url=https://www.theonion.com/if-pigs-are-so-smart-why-won-t-they-debate-me-1850447712"
+                >ogvideo.app/?url=https://theonion.com</a
+              >
+            </p>
+          </dd>
         </div>
 
         <div class="panel vstack gap-2">
@@ -58,7 +81,6 @@
 
 <style>
   .container {
-    height: 100%;
     width: 100%;
     display: grid;
     place-content: center;
@@ -66,6 +88,7 @@
   main {
     inline-size: min(90vw, 45rem);
     margin-inline: auto;
+    margin-block: var(--size-fluid-5);
     padding: 2vw;
     font-size: var(--font-size-1);
     font-weight: var(--font-weight-4);
@@ -81,5 +104,11 @@
   }
   main .panel {
     background-color: var(--gray-10);
+  }
+  a {
+    text-decoration: none;
+  }
+  .credits {
+    width: 100%;
   }
 </style>
