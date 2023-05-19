@@ -61,7 +61,7 @@
     place-content: center;
   }
   main {
-    inline-size: min(90vw, 40rem);
+    inline-size: min(90vw, 45rem);
     margin-inline: auto;
     padding: 3vw;
     font-size: var(--font-size-1);
