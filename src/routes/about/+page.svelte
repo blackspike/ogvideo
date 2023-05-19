@@ -12,9 +12,11 @@
       </p>
     </section>
 
+    <!-- footer -->
+    <Footer />
     <section class="vstack gap-3">
       <h2>FAQ</h2>
-      <dl class="vstack gap-4">
+      <dl class="vstack gap-5">
         <div class="vstack gap-2">
           <dt>The url import didn't work</dt>
           <dd>Yeah, it only works like 50% of the time. Hobby project!</dd>
@@ -23,6 +25,16 @@
         <div class="vstack gap-2">
           <dt>There's a weird bug</dt>
           <dd>Try reloading the page!</dd>
+        </div>
+
+        <div class="vstack gap-2">
+          <dt>I'd prefer an <code>MP4</code> rather than a <code>WEBM</code></dt>
+          <dd>Me too buddy! Blame the suits. A workaround is to run this app in Safari.</dd>
+        </div>
+
+        <div class="vstack gap-2">
+          <dt>There are horizontal scrollbars on mobile, for shame.</dt>
+          <dd>I know ☹️ – not very responsive of us. Hobby project!</dd>
         </div>
 
         <div class="vstack gap-2">
@@ -35,10 +47,6 @@
       </dl>
     </section>
 
-    <!-- footer -->
-    <footer class=" controls__footer">
-      <Footer />
-    </footer>
     <footer class="vstack gap-3">
       <p><a class="btn" href="/">← Cool</a></p>
     </footer>
@@ -56,12 +64,9 @@
     inline-size: min(90vw, 40rem);
     margin-inline: auto;
     padding: 3vw;
-    font-size: var(--font-size-2);
+    font-size: var(--font-size-1);
     font-weight: var(--font-weight-4);
     line-height: var(--font-lineheight-2);
-  }
-  dl {
-    margin-block: var(--size-3);
   }
   dt {
     font-size: var(--font-size-3);

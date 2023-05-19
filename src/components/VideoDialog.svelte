@@ -1,5 +1,5 @@
 <script>
-  import { recording, showDialog, video } from '../store.js'
+  import { video } from '../store.js'
   import { onMount } from 'svelte'
 
   let dialog, videoEl
@@ -23,8 +23,7 @@
       <track kind="captions" />
     </video>
     <footer class="vstack gap-3 space">
-      <a class="btn save" href={$video} download="social-media-video">Download</a>
-
+      <a class="btn save" href={$video} download="og-video">Download</a>
       <button value="cancel">Cancel</button>
     </footer>
   </form>

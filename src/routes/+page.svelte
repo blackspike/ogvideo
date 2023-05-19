@@ -43,12 +43,20 @@
     display: grid;
     overflow-x: hidden;
     grid-template-areas: 'canvas' 'controls';
+    display: contents;
   }
 
-  @media screen and (min-width: 70rem) {
+  @media screen and (min-width: calc(640px + 3vw)) {
     main {
       display: flex;
-      gap: 3vw;
+      flex-direction: column;
+      height: 100%;
+    }
+  }
+  @media screen and (min-width: 75rem) {
+    main {
+      display: flex;
+      flex-direction: row;
       justify-content: center;
       height: 100%;
       align-items: center;
@@ -57,9 +65,11 @@
 
   .controls {
     grid-area: controls;
+    margin: 1.5vw;
   }
   .canvas {
     grid-area: canvas;
+    margin: 1.5vw;
     align-self: center;
     justify-self: center;
   }

@@ -3,14 +3,16 @@ button {
   -webkit-appearance: none;
   appearance: none;
   background-color: transparent;
+  background-color: var(--gray-12);
   border-radius: var(--radius-5);
   border: 0;
   color: var(--gray-0);
   display: inline-block;
-  background-color: var(--gray-12);
-  font-weight: var(--font-weight-5);
+  font-family: 'Satoshi-Bold';
   font-size: var(--font-size-1);
+  font-weight: var(--font-weight-5);
   justify-content: center;
+  text-align: center;
   overflow: hidden;
   padding: var(--size-2) var(--size-4);
   text-decoration: none;

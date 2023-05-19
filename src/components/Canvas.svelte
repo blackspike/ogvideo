@@ -362,6 +362,7 @@
 
   // Record
   export async function record() {
+    const format = MediaRecorder.isTypeSupported('video/mp4') ? 'video/mp4' : 'video/webm'
     play()
     $video = null
     console.log('record called')
@@ -369,6 +370,7 @@
     const canvas = document.getElementById('canvas')
     const videoStream = canvas.captureStream(60)
     const mediaRecorder = new MediaRecorder(videoStream, {
+      mimeType: format,
       videoBitsPerSecond: 5000000 // Double the default quality from 2.5Mbps to 5Mbps
     })
 
@@ -379,7 +381,9 @@
     }
 
     mediaRecorder.onstop = function (e) {
-      const blob = new Blob(chunks, { type: 'video/mp4' })
+      const blob = new Blob(chunks, {
+        type: format
+      })
       chunks = []
       const videoURL = URL.createObjectURL(blob)
       $video = videoURL

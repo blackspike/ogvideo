@@ -148,6 +148,8 @@
 <style lang="scss">
   label {
     color: var(--gray-5);
+    font-family: 'Inter';
+    font-weight: var(--font-weight-6);
   }
   [type='range'] {
     opacity: 0.5;
@@ -171,7 +173,7 @@
   }
 
   .q-title {
-    font-size: var(--font-size-1);
+    font-size: var(--font-size-3);
   }
   .q-link {
     color: var(--gray-0);

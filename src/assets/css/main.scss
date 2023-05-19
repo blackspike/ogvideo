@@ -23,8 +23,6 @@
   margin: 0;
   padding: 0;
   position: relative;
-  font-family: var(--font-sans);
-  font-family: 'Satoshi-Bold';
 }
 
 html,
@@ -36,6 +34,7 @@ body {
 }
 
 body {
+  font-family: 'Satoshi-Bold';
   // display: flex;
   // justify-content: center;
   // align-items: center;
@@ -61,6 +60,7 @@ textarea {
   line-height: 1.2;
   border-radius: var(--radius-2);
   border: 0;
+  font-family: 'Satoshi-Bold';
 }
 
 input:not([type=range], [type=color]):focus,
