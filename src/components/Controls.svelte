@@ -37,9 +37,9 @@
         </button>
       </span>
       <a href="/about" class="q-link">
-        <h1 class="q-title hstack gap-2">
+        <h1 class="q-title hstack gap-2" aria-label="OG Video - click to learn more about this app">
           <span class="q-title-text">OG Video</span>
-          <svg class="q-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+          <svg aria-hidden="true" class="q-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
             ><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               ><path d="M0 0h24v24H0z" /><path
                 fill="currentColor"
