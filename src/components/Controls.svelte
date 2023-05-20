@@ -48,7 +48,7 @@
       </span>
       <a href="/about" class="q-link">
         <h1 class="q-title hstack gap-2">
-          <span>OG Video</span>
+          <span class="q-title-text">OG Video</span>
           <svg
             class="q-icon"
             xmlns="http://www.w3.org/2000/svg"
@@ -171,9 +171,17 @@
     height: 100%;
   }
 
-  .q-title {
+  .q-title-text {
+    display: none;
     font-size: var(--font-size-3);
   }
+
+  @media screen and (min-width: 640px) {
+    .q-title-text {
+      display: block;
+    }
+  }
+
   .q-link {
     color: var(--gray-0);
     text-decoration: none;

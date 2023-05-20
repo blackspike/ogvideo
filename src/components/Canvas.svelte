@@ -426,10 +426,6 @@
 
 <style lang="scss">
   .wrapper {
-    position: sticky;
-    top: var(--size-9);
-    height: 100%;
-    width: 100%;
     aspect-ratio: 1/1;
   }
   canvas {
