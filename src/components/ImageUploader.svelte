@@ -8,7 +8,7 @@
 
   // save to storage
   const saveToStorage = async (file, type) => {
-    // convert image file to base64 string and save to localStorage
+    // convert image file to base64 string
     const reader = new FileReader()
     reader.addEventListener('load', () => localStorage.setItem(type, reader.result), false)
 
