@@ -23,7 +23,7 @@
 </script>
 
 <main>
-  <div class="canvas">
+  <!-- <div class="canvas">
     {#if fontLoaded && logoImage && browser}
       <Canvas {font} bind:this={canvas} />
     {:else}
@@ -36,7 +36,7 @@
     </div>
   {/if}
 
-  <VideoDialog />
+  <VideoDialog /> -->
 </main>
 
 <style lang="scss">
