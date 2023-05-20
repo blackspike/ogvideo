@@ -1,4 +1,4 @@
-import { writable, readable, derived } from 'svelte/store'
+import { writable } from 'svelte/store'
 export const playing = writable(false)
 export const recording = writable(false)
 export const video = writable(null)

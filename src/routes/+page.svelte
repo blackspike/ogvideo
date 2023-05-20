@@ -1,6 +1,5 @@
 <script>
   import { onMount } from 'svelte'
-  import { browser } from '$app/environment'
   import FontFaceObserver from 'fontfaceobserver'
   import { logoImage } from '../store.js'
   import Controls from '../components/Controls.svelte'
@@ -23,20 +22,20 @@
 </script>
 
 <main>
-  <!-- <div class="canvas">
-    {#if fontLoaded && logoImage && browser}
+  <div class="canvas">
+    {#if fontLoaded && logoImage}
       <Canvas {font} bind:this={canvas} />
     {:else}
       <Spinner />
     {/if}
   </div>
-  {#if fontLoaded && browser}
+  {#if fontLoaded}
     <div class="controls">
       <Controls bind:this={controls} on:play={play} on:reset={reset} on:record={record} />
     </div>
   {/if}
 
-  <VideoDialog /> -->
+  <VideoDialog />
 </main>
 
 <style lang="scss">
