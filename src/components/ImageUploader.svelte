@@ -55,21 +55,11 @@
   on:dragleave={() => (dragOver = false)}
   on:drop={handleDragDrop}
   ondragover="return false"
-  style="--bg: url({watermark ? watermark : ''}); background-size: {imageType === 'bg'
-    ? 'cover'
-    : 'contain'}"
+  style="--bg: url({watermark ? watermark : ''}); background-size: {imageType === 'bg' ? 'cover' : 'contain'}"
 >
   <form class="dropzone-form">
-    <input
-      class="file-picker"
-      type="file"
-      id={imageType + 'input'}
-      accept="image/png, image/jpeg, image/webp"
-      bind:files
-    />
-    <label class="file-button" for={imageType + 'input'}
-      >{imageType === 'bg' ? 'Background' : 'Logo'} Image</label
-    >
+    <input class="file-picker" type="file" id={imageType + 'input'} accept="image/png, image/jpeg, image/webp" bind:files />
+    <label class="file-button" for={imageType + 'input'}>{imageType === 'bg' ? 'Background' : 'Logo'} Image</label>
   </form>
 </div>
 
@@ -121,5 +111,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    text-shadow: 0 0.1rem 1rem rgb(0 0 0 / 0.5);
   }
 </style>
