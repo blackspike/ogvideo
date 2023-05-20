@@ -2,21 +2,7 @@
   import { onMount } from 'svelte'
   import { fabric } from 'fabric'
   import anime from 'animejs'
-  import {
-    fg,
-    bg,
-    subtitle,
-    sizeSubtitle,
-    title,
-    sizeTitle,
-    bgOutro,
-    bgImage,
-    bgOpacity,
-    logoImage,
-    recording,
-    video,
-    playing
-  } from '../store.js'
+  import { fg, bg, subtitle, sizeSubtitle, title, sizeTitle, bgOutro, bgImage, bgOpacity, logoImage, recording, video, playing } from '../store.js'
 
   export let font
 
@@ -427,9 +413,5 @@
 <style lang="scss">
   .wrapper {
     aspect-ratio: 1/1;
-  }
-  canvas {
-    border-radius: var(--radius-2);
-    overflow: hidden;
   }
 </style>

@@ -4,6 +4,7 @@
   import FontFaceObserver from 'fontfaceobserver'
   import { logoImage } from '../store.js'
   import Controls from '../components/Controls.svelte'
+  import Spinner from '../components/Spinner.svelte'
   import Canvas from '../components/Canvas.svelte'
   import VideoDialog from '../components/VideoDialog.svelte'
 
@@ -25,6 +26,8 @@
   <div class="canvas">
     {#if fontLoaded && logoImage && browser}
       <Canvas {font} bind:this={canvas} />
+    {:else}
+      <Spinner />
     {/if}
   </div>
   {#if fontLoaded}
@@ -70,7 +73,10 @@
     grid-area: controls;
     margin: 1.5vw;
   }
+
   .canvas {
+    border-radius: var(--radius-2);
+    overflow: hidden;
     grid-area: canvas;
     margin: 1.5vw;
     align-self: center;
