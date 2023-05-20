@@ -12,7 +12,6 @@
   } from '../store.js'
   import ImageUploader from '../components/ImageUploader.svelte'
   import Scrape from '../components/Scrape.svelte'
-
   import { createEventDispatcher } from 'svelte'
   const dispatch = createEventDispatcher()
 

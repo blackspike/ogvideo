@@ -105,13 +105,14 @@
     // Update fonts
     canvas.set('fontFamily', font)
     canvas.requestRenderAll()
-  })
 
-  // Animate
-  animTimeline = anime.timeline({
-    update: function () {
-      canvas.renderAll()
-    }
+    // Add timeline
+    animTimeline = anime.timeline({
+      autoplay: false,
+      update: function () {
+        canvas.renderAll()
+      }
+    })
   })
 
   // Reset

@@ -1,13 +1,14 @@
 <script>
+  import { onMount } from 'svelte'
+  import FontFaceObserver from 'fontfaceobserver'
+  import { logoImage } from '../store.js'
   import Controls from '../components/Controls.svelte'
   import Canvas from '../components/Canvas.svelte'
   import VideoDialog from '../components/VideoDialog.svelte'
-  import FontFaceObserver from 'fontfaceobserver'
-  import { onMount } from 'svelte'
-  import { logoImage } from '../store.js'
 
   let font
   let fontLoaded = false
+
   onMount(() => {
     font = new FontFaceObserver('Satoshi-Bold')
     font.load().then(() => (fontLoaded = true))
