@@ -1,15 +1,5 @@
 <script>
-  import {
-    title,
-    sizeTitle,
-    subtitle,
-    sizeSubtitle,
-    bg,
-    fg,
-    bgOpacity,
-    recording,
-    playing
-  } from '../store.js'
+  import { title, sizeTitle, subtitle, sizeSubtitle, bg, fg, bgOpacity, recording, playing } from '../store.js'
   import ImageUploader from '../components/ImageUploader.svelte'
   import Scrape from '../components/Scrape.svelte'
   import { createEventDispatcher } from 'svelte'
@@ -49,12 +39,7 @@
       <a href="/about" class="q-link">
         <h1 class="q-title hstack gap-2">
           <span class="q-title-text">OG Video</span>
-          <svg
-            class="q-icon"
-            xmlns="http://www.w3.org/2000/svg"
-            width="32"
-            height="32"
-            viewBox="0 0 24 24"
+          <svg class="q-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
             ><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               ><path d="M0 0h24v24H0z" /><path
                 fill="currentColor"
@@ -80,12 +65,7 @@
             <span>Font Size</span>
             <input id="titleSize" type="range" min="20" max="100" bind:value={$sizeTitle} />
           </label>
-          <label
-            for="fg"
-            class="color-input-fg"
-            aria-label="foreground-color"
-            style={`--fg: ${$fg}; border-radius: 50%`}
-          >
+          <label for="fg" class="color-input-fg" aria-label="foreground-color" style={`--fg: ${$fg}; border-radius: 50%`}>
             <input class="visually-hidden fg" type="color" id="fg" bind:value={$fg} />
           </label>
         </div>
@@ -101,12 +81,7 @@
             <span>Font Size</span>
             <input id="subtitleSize" type="range" min="20" max="100" bind:value={$sizeSubtitle} />
           </label>
-          <label
-            for="fg2"
-            class="color-input-fg"
-            aria-label="foreground-color"
-            style={`--fg: ${$fg}; border-radius: 50%`}
-          >
+          <label for="fg2" class="color-input-fg" aria-label="Foreground color" style={`--fg: ${$fg}; border-radius: 50%`}>
             <input class="visually-hidden fg" type="color" id="fg2" bind:value={$fg} />
           </label>
         </div>
@@ -117,22 +92,9 @@
     <section class="panel controls__bgcolor hstack gap-3">
       <label for="bgOpacity" class="flex-fill hstack gap-3">
         <span>Background Color</span>
-        <input
-          class="flex-fill"
-          id="bgOpacity"
-          type="range"
-          min="0"
-          max="1"
-          step=".01"
-          bind:value={$bgOpacity}
-        />
+        <input class="flex-fill" id="bgOpacity" type="range" min="0" max="1" step=".01" bind:value={$bgOpacity} />
       </label>
-      <label
-        for="bg"
-        class="color-input-bg"
-        aria-label="background-color"
-        style={`--bg: ${$bg}; border-radius: 50%`}
-      >
+      <label for="bg" class="color-input-bg" aria-label="Background color" style={`--bg: ${$bg}; border-radius: 50%`}>
         <input class="visually-hidden bg" type="color" id="bg" bind:value={$bg} />
       </label>
     </section>

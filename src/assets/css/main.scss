@@ -28,17 +28,13 @@
 
 html,
 body {
-  height: 100%;
-  color: var(--gray-2);
   background-color: var(--gray-12);
-
+  block-size: 100%;
+  color: var(--gray-2);
 }
 
 body {
   font-family: 'Satoshi-Bold';
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
 }
 
 a {
@@ -54,15 +50,16 @@ a {
 
 input:not([type=range], [type=color]),
 textarea {
-  width: 100%;
   background-color: var(--gray-12);
-  color: var(--gray-0);
-  padding: var(--size-2);
-  font-size: var(--font-size-4);
-  line-height: 1.2;
   border-radius: var(--radius-2);
   border: 0;
+  color: var(--gray-0);
   font-family: 'Satoshi-Bold';
+  font-size: var(--font-size-4);
+  inline-size: 100%;
+  line-height: 1.2;
+  padding: var(--size-2) var(--size-3);
+  resize: none;
 }
 
 input:not([type=range], [type=color]):focus,

@@ -1,5 +1,6 @@
 <script>
   import { onMount } from 'svelte'
+  import { browser } from '$app/environment'
   import FontFaceObserver from 'fontfaceobserver'
   import { logoImage } from '../store.js'
   import Controls from '../components/Controls.svelte'
@@ -22,7 +23,7 @@
 
 <main>
   <div class="canvas">
-    {#if fontLoaded && logoImage}
+    {#if fontLoaded && logoImage && browser}
       <Canvas {font} bind:this={canvas} />
     {/if}
   </div>

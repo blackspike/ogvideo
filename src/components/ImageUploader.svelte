@@ -65,12 +65,11 @@
 
 <style lang="scss">
   .dropzone {
-    width: 100%;
-    min-height: 5rem;
+    block-size: 100%;
     color: var(--gray-4);
     display: flex;
-    height: 100%;
-    width: 100%;
+    inline-size: 100%;
+    min-block-size: 5rem;
     padding: 0;
   }
   .dropzone:after {
@@ -78,10 +77,10 @@
     background-position: center center;
     background-repeat: no-repeat;
     background-size: inherit;
-    opacity: 0.2;
     bottom: 0;
     content: '';
     left: 0;
+    opacity: 0.2;
     position: absolute;
     right: 0;
     top: 0;
@@ -89,28 +88,28 @@
   }
 
   .dropzone.dragOver {
-    transition: background-color 0.2s var(--ease-in-out-3);
     background-color: #ff00ff;
     color: var(--gray-0);
+    transition: background-color 0.2s var(--ease-in-out-3);
   }
 
   .dropzone-form {
     display: flex;
-    min-height: 100%;
-    width: 100%;
+    inline-size: 100%;
+    min-block-size: 100%;
     z-index: 2;
   }
   .file-picker {
     display: none;
   }
   .file-button {
-    appearance: none;
-    border: 0;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
     align-items: center;
-    text-shadow: 0 0.1rem 1rem rgb(0 0 0 / 0.5);
+    appearance: none;
+    block-size: 100%;
+    border: 0;
+    display: flex;
+    inline-size: 100%;
+    justify-content: center;
+    text-shadow: 0 0.15rem 0.2rem rgb(0 0 0 / 0.9);
   }
 </style>

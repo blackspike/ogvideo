@@ -21,9 +21,7 @@
       meta.bg ? ($bg = meta.bg) : null
 
       if (meta.bgImage) {
-        const blobFromBase64 = await fetch(
-          `data:'application/octet-stream';base64,${meta.bgImage}`
-        ).then((res) => res.blob())
+        const blobFromBase64 = await fetch(`data:'application/octet-stream';base64,${meta.bgImage}`).then((res) => res.blob())
         $bgImage = URL.createObjectURL(blobFromBase64)
       }
       fetching = false
@@ -45,7 +43,7 @@
 </script>
 
 <form class="scraper hstack gap-2" on:submit|preventDefault={scraper} class:fetching>
-  <input type="url" bind:value={url} placeholder="Enter your webpage URL (beta)" />
+  <input type="url" bind:value={url} placeholder="Enter your webpage URL" />
   <button class="fetch-btn" on:click={scraper} disabled={url === '  '}>
     {fetching ? 'Fetching…' : 'Fetch'}
   </button>
