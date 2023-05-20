@@ -30,7 +30,7 @@
       <Spinner />
     {/if}
   </div>
-  {#if fontLoaded}
+  {#if fontLoaded && browser}
     <div class="controls">
       <Controls bind:this={controls} on:play={play} on:reset={reset} on:record={record} />
     </div>
