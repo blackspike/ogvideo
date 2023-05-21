@@ -1,10 +1,16 @@
 <script>
-  let open = false
-  export let openDialog = () => (open = true)
+  import { onMount } from 'svelte'
+
+  let dialog
+
+  onMount(() => {
+    dialog = document.getElementById('dialog-about')
+  })
+
+  export const showAbout = () => dialog.showModal()
 </script>
 
-<h1>{open}</h1>
-<dialog id="dialog-about" class="panel" {open}>
+<dialog id="dialog-about" class="panel">
   <form method="dialog" class="content vstack gap-3">
     <section class="vstack gap-3">
       <h2>WTF is OG Video</h2>

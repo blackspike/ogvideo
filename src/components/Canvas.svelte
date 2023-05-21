@@ -406,12 +406,10 @@
   }
 </script>
 
-<section class="wrapper">
-  <canvas width={canvasSize} height={canvasSize} id="canvas" />
-</section>
+<canvas width={canvasSize} height={canvasSize} style={`--canvasSize: ${canvasSize}px`} id="canvas" />
 
 <style lang="scss">
-  .wrapper {
-    aspect-ratio: 1/1;
+  canvas {
+    aspect-ratio: var(--canvasSize) / var(--canvasSize);
   }
 </style>

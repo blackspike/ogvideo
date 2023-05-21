@@ -70,9 +70,9 @@ textarea:focus {
 }
 
 dialog {
-  max-height: 80vh;
+  border: 0;
   margin: auto;
-  border: none;
+  max-height: 90vh;
 }
 
 dialog::backdrop {

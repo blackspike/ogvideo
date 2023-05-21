@@ -64,6 +64,7 @@
     inline-size: 100%;
     min-block-size: 5rem;
     padding: 0;
+    transition: background-color 0.2s var(--ease-in-out-3);
   }
   .dropzone:after {
     background-image: var(--bg);
@@ -83,7 +84,9 @@
   .dropzone.dragOver {
     background-color: #ff00ff;
     color: var(--gray-0);
-    transition: background-color 0.2s var(--ease-in-out-3);
+  }
+  .dropzone:hover {
+    background: var(--gray-8);
   }
 
   .dropzone-form {

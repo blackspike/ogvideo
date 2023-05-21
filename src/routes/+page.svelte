@@ -6,6 +6,7 @@
   import Spinner from '../components/Spinner.svelte'
   import Canvas from '../components/Canvas.svelte'
   import VideoDialog from '../components/VideoDialog.svelte'
+  import AboutDialog from '../components/AboutDialog.svelte'
   import { dev } from '$app/environment'
   import '../assets/css/main.scss'
 
@@ -17,10 +18,11 @@
     font.load().then(() => (fontLoaded = true))
   })
 
-  let canvas, controls
+  let canvas, about
   const play = () => canvas.play()
   const reset = () => canvas.reset()
   const record = () => canvas.record()
+  const showAbout = () => about.showAbout()
 </script>
 
 <svelte:head>
@@ -39,12 +41,13 @@
   </div>
   {#if fontLoaded}
     <div class="controls">
-      <Controls bind:this={controls} on:play={play} on:reset={reset} on:record={record} />
+      <Controls on:showAbout={showAbout} on:play={play} on:reset={reset} on:record={record} />
     </div>
   {/if}
-
-  <VideoDialog />
 </main>
+
+<VideoDialog />
+<AboutDialog bind:this={about} />
 
 <style lang="scss">
   main {
@@ -58,17 +61,10 @@
     display: contents;
   }
 
-  @media screen and (min-width: calc(640px + 3vw)) {
-    main {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-    }
-  }
   @media screen and (min-width: 75rem) {
     main {
-      display: flex;
-      flex-direction: row;
+      display: grid;
+      grid-template-areas: 'canvas controls';
       justify-content: center;
       gap: 0;
       height: 100%;

@@ -1,16 +1,11 @@
 <script>
   import { title, sizeTitle, subtitle, sizeSubtitle, bg, fg, bgOpacity, recording, playing } from '../store.js'
-  import AboutDialog from '../components/AboutDialog.svelte'
   import ImageUploader from '../components/ImageUploader.svelte'
   import Scrape from '../components/Scrape.svelte'
   import { createEventDispatcher } from 'svelte'
   const dispatch = createEventDispatcher()
 
-  let openAbout
-
-  const openDialog = () => {
-    openAbout()
-  }
+  const showAbout = () => dispatch('showAbout')
 
   const play = () => {
     dispatch('play')
@@ -47,7 +42,7 @@
         <h1 class="q-title">
           <span class="q-title-text">OG Video</span>
         </h1>
-        <button class="btn-plain q-link" on:click={openDialog} aria-label="Click to learn more about this app">
+        <button class="btn-plain q-link" on:click={showAbout} aria-label="Click to learn more about this app">
           <svg aria-hidden="true" class="q-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
             ><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               ><path d="M0 0h24v24H0z" /><path
@@ -81,7 +76,8 @@
         <textarea id="title" class="textInput" bind:value={$title} />
       </label>
     </section>
-    <!-- subtitle -->
+
+    <!-- Subtitle -->
     <section class="panel controls__subtitle vstack gap-3">
       <label for="subtitle" class="vstack gap-3">
         <div class="size-color hstack gap-3 space">
@@ -97,6 +93,7 @@
         <textarea id="subtitle" class="textInput textInput--sm" bind:value={$subtitle} />
       </label>
     </section>
+
     <!-- Color -->
     <section class="panel controls__bgcolor hstack gap-3">
       <label for="bgOpacity" class="flex-fill hstack gap-3">
@@ -107,15 +104,14 @@
         <input class="visually-hidden bg" type="color" id="bg" bind:value={$bg} />
       </label>
     </section>
+
     <!-- ImageUploader -->
-    <section class="controls__background-image hstack gap-1">
+    <section class="controls__background-image hstack gap-2">
       <ImageUploader imageType={'bg'} />
       <ImageUploader imageType={'logo'} />
     </section>
   </div>
 </div>
-
-<AboutDialog bind:openDialog={openAbout} />
 
 <style lang="scss">
   label {
