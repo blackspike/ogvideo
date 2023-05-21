@@ -2,11 +2,11 @@
   import { title, bgImage, subtitle, bg } from '../store.js'
   import { onMount } from 'svelte'
 
-  let fetchedData, fetching
+  let fetchLoading
   let url = ''
 
   const scraper = async () => {
-    fetching = true
+    fetchLoading = true
 
     const res = await fetch(`/.netlify/functions/scrape?url=${url}`, {
       method: 'POST',
@@ -15,7 +15,6 @@
     const meta = await res.json()
 
     if (res.ok) {
-      fetchedData = meta
       $title = meta.title ? meta.title : $title
       $subtitle = meta.subtitle ? meta.subtitle : $subtitle
       meta.bg ? ($bg = meta.bg) : null
@@ -24,9 +23,9 @@
         const blobFromBase64 = await fetch(`data:'application/octet-stream';base64,${meta.bgImage}`).then((res) => res.blob())
         $bgImage = URL.createObjectURL(blobFromBase64)
       }
-      fetching = false
+      fetchLoading = false
     } else {
-      fetching = false
+      fetchLoading = false
       throw new Error(meta)
     }
   }
@@ -42,15 +41,16 @@
   })
 </script>
 
-<form class="scraper hstack gap-2" on:submit|preventDefault={scraper} class:fetching>
-  <input type="url" bind:value={url} placeholder="Enter your webpage URL" />
-  <button class="fetch-btn" on:click={scraper} disabled={url === '  '}>
-    {fetching ? 'Fetching…' : 'Fetch'}
+<form class="scraper hstack gap-2" on:submit|preventDefault={scraper} class:fetchLoading>
+  <input type="url" bind:value={url} placeholder="Your webpage URL" />
+
+  <button class="fetch-btn" on:click={scraper}>
+    {fetchLoading ? 'Fetching…' : 'Fetch'}
   </button>
 </form>
 
 <style>
-  .fetching {
+  .fetchLoading {
     pointer-events: none;
     opacity: 0.3;
     transition: all 0.3s var(--ease-in-out-3);
@@ -58,6 +58,9 @@
 
   input {
     font-size: var(--font-size-2);
+  }
+  input:invalid {
+    outline: 2px solid orangered;
   }
 
   .fetch-btn {
