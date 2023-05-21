@@ -1,6 +1,6 @@
 <script>
   import { title, sizeTitle, subtitle, sizeSubtitle, bg, fg, bgOpacity, recording, playing } from '../store.js'
-  // import ImageUploader from '../components/ImageUploader.svelte'
+  import ImageUploader from '../components/ImageUploader.svelte'
   import Scrape from '../components/Scrape.svelte'
   import { createEventDispatcher } from 'svelte'
   const dispatch = createEventDispatcher()
@@ -107,8 +107,8 @@
 
     <!-- ImageUploader -->
     <section class="controls__background-image hstack gap-2">
-      <!-- <ImageUploader imageType="bg" /> -->
-      <!-- <ImageUploader imageType="logo" /> -->
+      <ImageUploader imageType="bg" />
+      <ImageUploader imageType="logo" />
     </section>
   </div>
 </div>

@@ -17,10 +17,9 @@
 
   // Handle image uploads
   $: if (files) {
-    imageFile = URL.createObjectURL(files[0])
-    imageType === 'bg' ? ($bgImage = imageFile) : ($logoImage = imageFile)
-
     if (browser) {
+      imageFile = URL.createObjectURL(files[0])
+      imageType === 'bg' ? ($bgImage = imageFile) : ($logoImage = imageFile)
       localStorage.setItem('blob', imageFile)
       saveToStorage(files[0], imageType)
     }
@@ -28,12 +27,11 @@
 
   // Handle image drag
   function handleDragDrop(e) {
-    e.preventDefault()
-    const uploadedFile = e.dataTransfer.files
-    imageFile = URL.createObjectURL(uploadedFile[0])
-    imageType === 'bg' ? ($bgImage = imageFile) : ($logoImage = imageFile)
-
     if (browser) {
+      e.preventDefault()
+      const uploadedFile = e.dataTransfer.files
+      imageFile = URL.createObjectURL(uploadedFile[0])
+      imageType === 'bg' ? ($bgImage = imageFile) : ($logoImage = imageFile)
       saveToStorage(files[0], imageType)
     }
   }
