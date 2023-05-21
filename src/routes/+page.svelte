@@ -15,7 +15,7 @@
     font.load().then(() => (fontLoaded = true))
   })
 
-  let canvas, about
+  let canvas
   const play = () => canvas.play()
   const reset = () => canvas.reset()
   const record = () => canvas.record()

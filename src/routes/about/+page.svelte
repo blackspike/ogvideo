@@ -1,3 +1,13 @@
+<script>
+  import { logoImage } from '../../store.js'
+  console.log($logoImage)
+
+  const clearStorage = () => {
+    localStorage.removeItem('logo')
+    $logoImage = ''
+  }
+</script>
+
 <div class="container">
   <main class="panel about vstack gap-7">
     <!-- Faq -->
@@ -55,6 +65,11 @@
         <div class="panel vstack gap-2">
           <dt>There are horizontal scrollbars on mobile, for shame.</dt>
           <dd>I know ☹️ – not very responsive of us. Hobby project!</dd>
+        </div>
+
+        <div class="panel vstack gap-2">
+          <dt>The logo is stuck.</dt>
+          <dd>Reset it by <button class="btn-plain" on:click={clearStorage}>clicking here!</button></dd>
         </div>
 
         <div class="panel vstack gap-2">
