@@ -5,7 +5,7 @@
   let dialog, videoEl
 
   onMount(() => {
-    dialog = document.getElementById('dialog')
+    dialog = document.getElementById('dialog-video')
   })
 
   $: $video, toggleDialog()
@@ -17,7 +17,7 @@
   }
 </script>
 
-<dialog id="dialog" class="panel">
+<dialog id="dialog-video" class="panel">
   <form method="dialog" class="content">
     <video bind:this={videoEl} autoplay controls muted playsinline>
       <track kind="captions" />

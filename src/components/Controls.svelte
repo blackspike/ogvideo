@@ -1,9 +1,16 @@
 <script>
   import { title, sizeTitle, subtitle, sizeSubtitle, bg, fg, bgOpacity, recording, playing } from '../store.js'
+  import AboutDialog from '../components/AboutDialog.svelte'
   import ImageUploader from '../components/ImageUploader.svelte'
   import Scrape from '../components/Scrape.svelte'
   import { createEventDispatcher } from 'svelte'
   const dispatch = createEventDispatcher()
+
+  let openAbout
+
+  const openDialog = () => {
+    openAbout()
+  }
 
   const play = () => {
     dispatch('play')
@@ -36,9 +43,11 @@
           {$recording ? 'Recording…' : 'Create Video'}
         </button>
       </span>
-      <a href="/about" class="q-link">
-        <h1 class="q-title hstack gap-2" aria-label="OG Video - click to learn more about this app">
+      <header class="hstack gap-2">
+        <h1 class="q-title">
           <span class="q-title-text">OG Video</span>
+        </h1>
+        <button class="btn-plain q-link" on:click={openDialog} aria-label="Click to learn more about this app">
           <svg aria-hidden="true" class="q-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
             ><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               ><path d="M0 0h24v24H0z" /><path
@@ -47,8 +56,8 @@
               /></g
             ></svg
           >
-        </h1>
-      </a>
+        </button>
+      </header>
     </section>
     <!-- scrape -->
     <section class="panel controls__scrape">
@@ -106,6 +115,8 @@
   </div>
 </div>
 
+<AboutDialog bind:openDialog={openAbout} />
+
 <style lang="scss">
   label {
     color: var(--gray-5);
@@ -147,6 +158,9 @@
   .q-link {
     color: var(--gray-0);
     text-decoration: none;
+    padding: var(--size-1);
+    display: flex;
+    align-items: center;
   }
   .q-icon {
     height: var(--size-5);

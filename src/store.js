@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store'
 export const playing = writable(false)
 export const recording = writable(false)
-export const video = writable(null)
+export const video = writable(false)
 export const bgImage = writable('')
 export const logoImage = writable('')
 export const bg = writable('#1e1e1e')

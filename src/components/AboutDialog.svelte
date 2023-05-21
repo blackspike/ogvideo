@@ -1,5 +1,11 @@
-<div class="container">
-  <main class="panel about vstack gap-7">
+<script>
+  let open = false
+  export let openDialog = () => (open = true)
+</script>
+
+<h1>{open}</h1>
+<dialog id="dialog-about" class="panel" {open}>
+  <form method="dialog" class="content vstack gap-3">
     <section class="vstack gap-3">
       <h2>WTF is OG Video</h2>
       <p>
@@ -67,59 +73,31 @@
       </dl>
     </section>
 
-    <footer class="vstack gap-3">
-      <p><a class="btn" href="/">← Cool</a></p>
+    <footer class="hstack gap-3">
+      <button value="cancel">← Cool</button>
     </footer>
-  </main>
-</div>
+  </form>
+</dialog>
 
 <style>
-  .container {
-    width: 100%;
-    display: grid;
-    place-content: center;
-  }
-  .container:after {
-    background-image: url('/temp.webp');
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    bottom: 0;
-    content: '';
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: 2;
-    opacity: 0.3;
-  }
-  main {
-    inline-size: min(90vw, 45rem);
-    margin-inline: auto;
-    margin-block: var(--size-fluid-5);
-    padding: 2vw;
+  .content {
+    max-width: 40rem;
     font-size: var(--font-size-1);
     font-weight: var(--font-weight-4);
     line-height: var(--font-lineheight-3);
-    z-index: 3;
-    box-shadow: var(--shadow-6);
+    padding-block: var(--size-1);
   }
+  .content .panel {
+    background-color: var(--gray-10);
+  }
+
   dt {
     font-size: var(--font-size-3);
   }
+
   p,
   dd {
     font-family: 'Inter';
     color: var(--gray-3);
-  }
-  main .panel {
-    background-color: var(--gray-10);
-  }
-  a {
-    text-decoration: none;
-  }
-  .credits {
-    width: 100%;
   }
 </style>

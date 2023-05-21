@@ -3,6 +3,11 @@
 @import './_stacks';
 @import './_fonts';
 
+html {
+  color-scheme: dark;
+  --brand: #ff00ff;
+}
+
 .visually-hidden {
   border: 0;
   clip: rect(0 0 0 0);
@@ -14,10 +19,6 @@
   width: 1px;
 }
 
-:root {
-  color-scheme: dark;
-  --brand: #ff00ff;
-}
 
 * {
   box-sizing: border-box;
@@ -39,6 +40,7 @@ body {
 
 a {
   color: var(--brand);
+  text-decoration: none;
 }
 
 .panel {
@@ -65,4 +67,16 @@ textarea {
 input:not([type=range], [type=color]):focus,
 textarea:focus {
   outline: 1px solid var(--gray-8);
+}
+
+dialog {
+  max-height: 80vh;
+  margin: auto;
+  border: none;
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.4);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
 }

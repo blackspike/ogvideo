@@ -6,6 +6,8 @@
   import Spinner from '../components/Spinner.svelte'
   import Canvas from '../components/Canvas.svelte'
   import VideoDialog from '../components/VideoDialog.svelte'
+  import { dev } from '$app/environment'
+  import '../assets/css/main.scss'
 
   let font
   let fontLoaded = false
@@ -20,6 +22,12 @@
   const reset = () => canvas.reset()
   const record = () => canvas.record()
 </script>
+
+<svelte:head>
+  {#if !dev}
+    <script defer data-domain="ogvideo.app" src="/js/script.js"></script>
+  {/if}
+</svelte:head>
 
 <main>
   <div class="canvas">
