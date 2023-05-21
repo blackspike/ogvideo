@@ -6,9 +6,6 @@
   import Spinner from '../components/Spinner.svelte'
   import Canvas from '../components/Canvas.svelte'
   import VideoDialog from '../components/VideoDialog.svelte'
-  import AboutDialog from '../components/AboutDialog.svelte'
-  import { dev } from '$app/environment'
-  import '../assets/css/main.scss'
 
   let font
   let fontLoaded = false
@@ -22,14 +19,7 @@
   const play = () => canvas.play()
   const reset = () => canvas.reset()
   const record = () => canvas.record()
-  const showAbout = () => about.showAbout()
 </script>
-
-<svelte:head>
-  {#if !dev}
-    <script defer data-domain="ogvideo.app" src="/js/script.js"></script>
-  {/if}
-</svelte:head>
 
 <main>
   <div class="canvas">
@@ -41,13 +31,12 @@
   </div>
   {#if fontLoaded}
     <div class="controls">
-      <Controls on:showAbout={showAbout} on:play={play} on:reset={reset} on:record={record} />
+      <Controls on:play={play} on:reset={reset} on:record={record} />
     </div>
   {/if}
 </main>
 
 <VideoDialog />
-<AboutDialog bind:this={about} />
 
 <style lang="scss">
   main {

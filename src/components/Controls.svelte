@@ -5,8 +5,6 @@
   import { createEventDispatcher } from 'svelte'
   const dispatch = createEventDispatcher()
 
-  const showAbout = () => dispatch('showAbout')
-
   const play = () => {
     dispatch('play')
     $playing = true
@@ -42,7 +40,7 @@
         <h1 class="q-title">
           <span class="q-title-text">OG Video</span>
         </h1>
-        <button class="btn-plain q-link" on:click={showAbout} aria-label="Click to learn more about this app">
+        <a href="/about" class="btn-plain q-link" aria-label="About this app">
           <svg aria-hidden="true" class="q-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
             ><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               ><path d="M0 0h24v24H0z" /><path
@@ -51,7 +49,7 @@
               /></g
             ></svg
           >
-        </button>
+        </a>
       </header>
     </section>
     <!-- scrape -->

@@ -1,29 +1,26 @@
-<script>
-  import Footer from '../../components/Footer.svelte'
-</script>
-
 <div class="container">
   <main class="panel about vstack gap-7">
-    <section class="vstack gap-3">
-      <h2>WTF is OG Video</h2>
-      <p>
-        Enter your blog post url and it'll try and grab the meta title, description and share image,
-        and let you create and export an animated video for your socials!
-      </p>
-    </section>
-
-    <!-- footer -->
-    <div class="panel panel-sm">
-      <Footer>
-        <a class="btn credits" href="/demo.mp4">Example Video</a>
-        <a class="btn credits" href="https://github.com/blackspike/ogvideo">Source on GitHub</a>
-        <a class="btn credits" href="https://www.blackspike.com">by blackspike.com</a>
-      </Footer>
-    </div>
     <!-- Faq -->
     <section class="vstack gap-3">
-      <h2>FAQ</h2>
+      <h1>OG Video FAQ</h1>
       <dl class="vstack gap-2">
+        <div class="panel vstack gap-2">
+          <dt>WTF is OG Video</dt>
+          <dd>
+            Enter your blog post url and it'll try and grab the meta title, description and share image, and let you create and export an animated video for
+            your socials!
+          </dd>
+        </div>
+
+        <div class="panel vstack gap-2">
+          <dt>Demo? Who made this? Where's the code at?</dt>
+          <dd>
+            <a class="credits" href="/demo.mp4">Example Video</a> ::
+            <a class="credits" href="https://www.blackspike.com">by blackspike.com</a> ::
+            <a class="credits" href="https://github.com/blackspike/ogvideo">Source on GitHub</a>
+          </dd>
+        </div>
+
         <div class="panel vstack gap-2">
           <dt>The url import didn't work</dt>
           <dd>Yeah, it only works like 50% of the time. Hobby project!</dd>
@@ -40,13 +37,10 @@
             <p>Why yes! Just add <code>?url=https://yoursite.com</code> to the url</p>
 
             <p>
-              <a href="https://ogvideo.app/?url=https://www.bbc.co.uk/news/business-65644340"
-                >ogvideo.app/?url=https://bbc.co.uk</a
-              >
+              <a href="https://ogvideo.app/?url=https://www.bbc.co.uk/news/business-65644340">ogvideo.app/?url=https://bbc.co.uk</a>
             </p>
             <p>
-              <a
-                href="https://ogvideo.app/?url=https://www.theonion.com/if-pigs-are-so-smart-why-won-t-they-debate-me-1850447712"
+              <a href="https://ogvideo.app/?url=https://www.theonion.com/if-pigs-are-so-smart-why-won-t-they-debate-me-1850447712"
                 >ogvideo.app/?url=https://theonion.com</a
               >
             </p>
@@ -85,8 +79,24 @@
     display: grid;
     place-content: center;
   }
+  .container:after {
+    background-attachment: fixed;
+    background-image: url('/temp.webp');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    bottom: 0;
+    content: '';
+    left: 0;
+    opacity: 0.3;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 2;
+  }
   main {
-    inline-size: min(90vw, 45rem);
+    z-index: 3;
+    inline-size: min(90vw, 50rem);
     margin-inline: auto;
     margin-block: var(--size-fluid-5);
     padding: 2vw;
