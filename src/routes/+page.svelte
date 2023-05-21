@@ -10,9 +10,6 @@
   import { dev } from '$app/environment'
   import '../assets/css/main.scss'
 
-  // Fix the error 500?
-  export const ssr = false
-
   let font
   let fontLoaded = false
 
