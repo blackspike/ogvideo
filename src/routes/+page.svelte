@@ -2,7 +2,7 @@
   import { onMount } from 'svelte'
   import FontFaceObserver from 'fontfaceobserver'
   import { logoImage } from '../store.js'
-  // import Controls from '../components/Controls.svelte'
+  import Controls from '../components/Controls.svelte'
   import Spinner from '../components/Spinner.svelte'
   import Canvas from '../components/Canvas.svelte'
   import VideoDialog from '../components/VideoDialog.svelte'
@@ -41,7 +41,7 @@
   </div>
   {#if fontLoaded}
     <div class="controls">
-      <!-- <Controls on:showAbout={showAbout} on:play={play} on:reset={reset} on:record={record} /> -->
+      <Controls on:showAbout={showAbout} on:play={play} on:reset={reset} on:record={record} />
     </div>
   {/if}
 </main>
