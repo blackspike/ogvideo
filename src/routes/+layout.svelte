@@ -5,7 +5,7 @@
 
 <svelte:head>
   {#if !dev}
-    <script defer data-domain="ogvideo.app" src="/js/script.js"></script>
+    <script defer data-domain="ogvideo.blackspike.com" src="/js/script.js"></script>
   {/if}
 </svelte:head>
 

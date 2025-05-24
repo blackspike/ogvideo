@@ -4,7 +4,7 @@
 
 ## Demo
 
-https://ogvideo.app
+https://ogvideo.blackspike.com/
 
 This is a project to learn [Svelte.js](https://svelte.dev)!
 

@@ -47,11 +47,11 @@
             <p>Why yes! Just add <code>?url=https://yoursite.com</code> to the url</p>
 
             <p>
-              <a href="https://ogvideo.app/?url=https://www.bbc.co.uk/news/business-65644340">ogvideo.app/?url=https://bbc.co.uk</a>
+              <a href="https://ogvideo.blackspike.com/?url=https://www.bbc.co.uk/news/business-65644340">ogvideo.blackspike.com/?url=https://bbc.co.uk</a>
             </p>
             <p>
-              <a href="https://ogvideo.app/?url=https://www.theonion.com/if-pigs-are-so-smart-why-won-t-they-debate-me-1850447712"
-                >ogvideo.app/?url=https://theonion.com</a
+              <a href="https://ogvideo.blackspike.com/?url=https://www.theonion.com/if-pigs-are-so-smart-why-won-t-they-debate-me-1850447712"
+                >ogvideo.blackspike.com/?url=https://theonion.com</a
               >
             </p>
           </dd>
